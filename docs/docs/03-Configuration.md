@@ -21,7 +21,7 @@ You can configure the app at runtime using various environment variables:
   (default: `localhost`)
 - `WEBFUSE__EMIFUSE__HTTP__PORT`
   port of the HTTP API of the emifuse service
-  (default: `9000`)
+  (default: `9001`)
 - `WEBFUSE__EMIFUSE__HTTP__PATH`
   path of the HTTP API of the emifuse service
   (default: ``)
