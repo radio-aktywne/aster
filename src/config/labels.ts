@@ -9,17 +9,17 @@ export const labels = {
   },
   pages: {
     index: {
-      title: "webfuse",
-      description: "webfuse",
+      title: "aster",
+      description: "aster",
     },
     notFound: {
-      title: "Not Found • webfuse",
-      description: "webfuse",
+      title: "Not Found • aster",
+      description: "aster",
       text: "Page not found",
     },
     error: {
-      title: "Error • webfuse",
-      description: "webfuse",
+      title: "Error • aster",
+      description: "aster",
       text: "Something went wrong",
       buttons: {
         retry: {

@@ -1,5 +1,5 @@
 info:
-  title: emifuse app
+  title: dingo
 openapi: 3.1.0
 paths:
   /ping:

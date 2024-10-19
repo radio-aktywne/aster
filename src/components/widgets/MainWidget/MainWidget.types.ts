@@ -1,5 +1,5 @@
-import { components as emifuseComponents } from "../../../api/emifuse";
+import { components as dingoComponents } from "../../../api/dingo";
 
 export type MainWidgetProps = {
-  playlist?: emifuseComponents["schemas"]["GetPlaylistResponse"];
+  playlist?: dingoComponents["schemas"]["GetPlaylistResponse"];
 };

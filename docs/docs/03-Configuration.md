@@ -7,33 +7,33 @@ title: Configuration
 
 You can configure the app at runtime using various environment variables:
 
-- `WEBFUSE__SERVER__HOST` -
+- `ASTER__SERVER__HOST` -
   host to run the server on
   (default: `0.0.0.0`)
-- `WEBFUSE__SERVER__PORT` -
+- `ASTER__SERVER__PORT` -
   port to run the server on
   (default: `12000`)
-- `WEBFUSE__EMIFUSE__HTTP__SCHEME`
-  scheme of the HTTP API of the emifuse service
+- `ASTER__DINGO__HTTP__SCHEME`
+  scheme of the HTTP API of the dingo service
   (default: `http`)
-- `WEBFUSE__EMIFUSE__HTTP__HOST`
-  host of the HTTP API of the emifuse service
+- `ASTER__DINGO__HTTP__HOST`
+  host of the HTTP API of the dingo service
   (default: `localhost`)
-- `WEBFUSE__EMIFUSE__HTTP__PORT`
-  port of the HTTP API of the emifuse service
+- `ASTER__DINGO__HTTP__PORT`
+  port of the HTTP API of the dingo service
   (default: `9001`)
-- `WEBFUSE__EMIFUSE__HTTP__PATH`
-  path of the HTTP API of the emifuse service
+- `ASTER__DINGO__HTTP__PATH`
+  path of the HTTP API of the dingo service
   (default: ``)
-- `WEBFUSE__EMITUNES__HTTP__SCHEME`
-  scheme of the HTTP API of the emitunes service
+- `ASTER__PELICAN__HTTP__SCHEME`
+  scheme of the HTTP API of the pelican service
   (default: `http`)
-- `WEBFUSE__EMITUNES__HTTP__HOST`
-  host of the HTTP API of the emitunes service
+- `ASTER__PELICAN__HTTP__HOST`
+  host of the HTTP API of the pelican service
   (default: `localhost`)
-- `WEBFUSE__EMITUNES__HTTP__PORT`
-  port of the HTTP API of the emitunes service
+- `ASTER__PELICAN__HTTP__PORT`
+  port of the HTTP API of the pelican service
   (default: `42000`)
-- `WEBFUSE__EMITUNES__HTTP__PATH`
-  path of the HTTP API of the emitunes service
+- `ASTER__PELICAN__HTTP__PATH`
+  path of the HTTP API of the pelican service
   (default: ``)

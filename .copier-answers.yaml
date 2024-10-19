@@ -2,15 +2,15 @@
 _commit: 0.2.0
 _src_path: gh:radio-aktywne/template-app-next
 accountname: radio-aktywne
-appname: webfuse
+appname: aster
 description: Broadcast composing app 🧼
 docs: true
-docsurl: https://radio-aktywne.github.io/webfuse
-envprefix: WEBFUSE
-imagename: apps/webfuse
-keyprefix: webfuse
+docsurl: https://radio-aktywne.github.io/aster
+envprefix: ASTER
+imagename: apps/aster
+keyprefix: aster
 port: 12000
 registry: true
 releases: true
-reponame: webfuse
-repourl: https://github.com/radio-aktywne/webfuse
+reponame: aster
+repourl: https://github.com/radio-aktywne/aster

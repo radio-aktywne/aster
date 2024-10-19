@@ -1,5 +1,5 @@
 import { GetPlaylistsProps } from "../../actions";
-import { components } from "../../api/emitunes";
+import { components } from "../../api/pelican";
 
 export type Playlists = components["schemas"]["PlaylistList"];
 

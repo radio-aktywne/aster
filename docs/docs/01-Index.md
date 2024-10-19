@@ -3,10 +3,10 @@ slug: /
 title: Index
 ---
 
-# webfuse
+# aster
 
 Broadcast composing app 🧼
 
 ## 💡 About
 
-`webfuse` is a web app for broadcast composing with Liquidsoap.
+`aster` is a web app for broadcast composing with Liquidsoap.

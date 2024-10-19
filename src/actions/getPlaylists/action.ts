@@ -1,6 +1,6 @@
 "use server";
 
-import { emitunes } from "../../api";
+import { pelican } from "../../api";
 import { GetPlaylistsProps } from "./types";
 
 const errorMessage = "Getting playlists failed.";
@@ -13,7 +13,7 @@ export async function getPlaylists({
   order,
 }: GetPlaylistsProps = {}) {
   try {
-    const { data, error } = await emitunes.GET("/playlists", {
+    const { data, error } = await pelican.GET("/playlists", {
       params: {
         query: {
           limit: limit,

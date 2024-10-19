@@ -1,6 +1,6 @@
 "use server";
 
-import { emifuse } from "../../api";
+import { dingo } from "../../api";
 import { UpdateCurrentPlaylistProps } from "./types";
 
 const genericErrorMessage = "Updating current playlist failed.";
@@ -10,7 +10,7 @@ export async function updateCurrentPlaylist({
   id,
 }: UpdateCurrentPlaylistProps) {
   try {
-    const { data, error, response } = await emifuse.PUT("/playlist", {
+    const { data, error, response } = await dingo.PUT("/playlist", {
       body: { id },
     });
 

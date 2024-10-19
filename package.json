@@ -1,15 +1,15 @@
 {
-  "name": "webfuse",
+  "name": "aster",
   "private": true,
   "scripts": {
-    "dev": "next dev --hostname \"${WEBFUSE__SERVER__HOST:-0.0.0.0}\" --port \"${WEBFUSE__SERVER__PORT:-12000}\"",
-    "run": "next start --hostname \"${WEBFUSE__SERVER__HOST:-0.0.0.0}\" --port \"${WEBFUSE__SERVER__PORT:-12000}\"",
+    "dev": "next dev --hostname \"${ASTER__SERVER__HOST:-0.0.0.0}\" --port \"${ASTER__SERVER__PORT:-12000}\"",
+    "run": "next start --hostname \"${ASTER__SERVER__HOST:-0.0.0.0}\" --port \"${ASTER__SERVER__PORT:-12000}\"",
     "build": "next build",
     "clean": "rm --recursive --force build/",
     "update": "ncu --peer --upgrade && npm i --no-audit --no-fund",
-    "generate-api-emifuse": "openapi-typescript openapi/emifuse.yaml -o src/api/emifuse/types.d.ts",
-    "generate-api-emitunes": "openapi-typescript openapi/emitunes.yaml -o src/api/emitunes/types.d.ts",
-    "generate-api": "npm run -- generate-api-emifuse && npm run -- generate-api-emitunes"
+    "generate-api-dingo": "openapi-typescript openapi/dingo.yaml -o src/api/dingo/types.d.ts",
+    "generate-api-pelican": "openapi-typescript openapi/pelican.yaml -o src/api/pelican/types.d.ts",
+    "generate-api": "npm run -- generate-api-dingo && npm run -- generate-api-pelican"
   },
   "dependencies": {
     "@mantine/core": "^7.7.1",

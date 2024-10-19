@@ -1,3 +1,3 @@
-export const colorSchemeStorageKey = "webfuse-color-scheme";
+export const colorSchemeStorageKey = "aster-color-scheme";
 export const defaultColorScheme = "auto";
-export const stateStorageKey = "webfuse-state";
+export const stateStorageKey = "aster-state";
