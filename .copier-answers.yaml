@@ -9,7 +9,7 @@ docsurl: https://radio-aktywne.github.io/aster
 envprefix: ASTER
 imagename: apps/aster
 keyprefix: aster
-port: 12000
+port: 10110
 registry: true
 releases: true
 reponame: aster

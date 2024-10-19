@@ -12,7 +12,7 @@ You can configure the app at runtime using various environment variables:
   (default: `0.0.0.0`)
 - `ASTER__SERVER__PORT` -
   port to run the server on
-  (default: `12000`)
+  (default: `10110`)
 - `ASTER__DINGO__HTTP__SCHEME`
   scheme of the HTTP API of the dingo service
   (default: `http`)
@@ -21,7 +21,7 @@ You can configure the app at runtime using various environment variables:
   (default: `localhost`)
 - `ASTER__DINGO__HTTP__PORT`
   port of the HTTP API of the dingo service
-  (default: `9001`)
+  (default: `10101`)
 - `ASTER__DINGO__HTTP__PATH`
   path of the HTTP API of the dingo service
   (default: ``)
@@ -33,7 +33,7 @@ You can configure the app at runtime using various environment variables:
   (default: `localhost`)
 - `ASTER__PELICAN__HTTP__PORT`
   port of the HTTP API of the pelican service
-  (default: `42000`)
+  (default: `10200`)
 - `ASTER__PELICAN__HTTP__PATH`
   path of the HTTP API of the pelican service
   (default: ``)
