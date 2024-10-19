@@ -3,10 +3,10 @@ slug: /
 title: Index
 ---
 
-# webfuse app
+# webfuse
 
-Audio streaming with Liquidsoap web UI 🧼
+Broadcast composing app 🧼
 
 ## 💡 About
 
-`webfuse` is a web application for managing audio streaming with Liquidsoap.
+`webfuse` is a web app for broadcast composing with Liquidsoap.
