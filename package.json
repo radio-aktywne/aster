@@ -2,8 +2,8 @@
   "name": "aster",
   "private": true,
   "scripts": {
-    "dev": "next dev --hostname \"${ASTER__SERVER__HOST:-0.0.0.0}\" --port \"${ASTER__SERVER__PORT:-12000}\"",
-    "run": "next start --hostname \"${ASTER__SERVER__HOST:-0.0.0.0}\" --port \"${ASTER__SERVER__PORT:-12000}\"",
+    "dev": "next dev --hostname \"${ASTER__SERVER__HOST:-0.0.0.0}\" --port \"${ASTER__SERVER__PORT:-10110}\"",
+    "run": "next start --hostname \"${ASTER__SERVER__HOST:-0.0.0.0}\" --port \"${ASTER__SERVER__PORT:-10110}\"",
     "build": "next build",
     "clean": "rm --recursive --force build/",
     "update": "ncu --peer --upgrade && npm i --no-audit --no-fund",
