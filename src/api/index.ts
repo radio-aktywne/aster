@@ -1,2 +1,2 @@
-export { emifuse } from "./emifuse";
-export { emitunes } from "./emitunes";
+export { dingo } from "./dingo";
+export { pelican } from "./pelican";
