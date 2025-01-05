@@ -25,16 +25,23 @@ msgstr "An error occurred while listing playlists."
 msgid "An error occurred while updating current playlist."
 msgstr "An error occurred while updating current playlist."
 
+#: src/app/(protected)/page.tsx:16
+#: src/app/(protected)/page.tsx:17
+#: src/app/auth/error/page.tsx:17
 #: src/app/layout.tsx:19
 #: src/app/layout.tsx:20
-#: src/app/page.tsx:16
-#: src/app/page.tsx:17
+#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
 #: src/components/metadata/root/root-error-metadata/main.tsx:13
 #: src/components/metadata/root/root-not-found-metadata/main.tsx:13
 #: src/components/metadata/root/root-page-metadata/main.tsx:13
 #: src/components/metadata/root/root-page-metadata/main.tsx:14
 msgid "aster"
 msgstr "aster"
+
+#: src/app/auth/error/page.tsx:18
+#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:14
+msgid "Auth error • aster"
+msgstr "Auth error • aster"
 
 #: src/hooks/use-toasts/main.tsx:19
 msgid "Error"
@@ -44,6 +51,10 @@ msgstr "Error"
 msgid "Error • aster"
 msgstr "Error • aster"
 
+#: src/components/views/auth/auth-error-page-view/main.tsx:14
+msgid "Error in auth flow"
+msgstr "Error in auth flow"
+
 #: src/hooks/use-toasts/main.tsx:31
 msgid "Info"
 msgstr "Info"
@@ -52,6 +63,10 @@ msgstr "Info"
 #: src/actions/pelican/list-playlists/constants.ts:5
 msgid "Invalid input."
 msgstr "Invalid input."
+
+#: src/components/layouts/session-layout/components/user-menu/components/logout-button/main.tsx:23
+msgid "Logout"
+msgstr "Logout"
 
 #: src/components/metadata/root/root-not-found-metadata/main.tsx:14
 msgid "Not Found • aster"
@@ -92,3 +107,15 @@ msgstr "Success"
 #: src/hooks/use-toasts/main.tsx:55
 msgid "Warning"
 msgstr "Warning"
+
+#: src/actions/dingo/get-current-playlist/constants.ts:7
+msgid "You are not authorized to get current playlist."
+msgstr "You are not authorized to get current playlist."
+
+#: src/actions/pelican/list-playlists/constants.ts:6
+msgid "You are not authorized to list playlists."
+msgstr "You are not authorized to list playlists."
+
+#: src/actions/dingo/update-current-playlist/constants.ts:8
+msgid "You are not authorized to update current playlist."
+msgstr "You are not authorized to update current playlist."
