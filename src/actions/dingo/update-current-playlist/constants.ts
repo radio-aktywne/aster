@@ -5,4 +5,7 @@ export const errors = {
     message: "An error occurred while updating current playlist.",
   }),
   invalidInput: msg({ message: "Invalid input." }),
+  unauthorized: msg({
+    message: "You are not authorized to update current playlist.",
+  }),
 };

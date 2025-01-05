@@ -11,7 +11,7 @@ export async function listPlaylists({
   order,
   where,
 }: ListPlaylistsInput = {}): Promise<ListPlaylistsOutput> {
-  const { data, error } = await pelican.GET("/playlists", {
+  const { data, error, response } = await pelican.GET("/playlists", {
     params: {
       query: {
         include: include,
@@ -23,7 +23,7 @@ export async function listPlaylists({
     },
   });
 
-  if (error) throw new PelicanError();
+  if (error || !response.ok) throw new PelicanError();
 
   return { playlists: data };
 }
