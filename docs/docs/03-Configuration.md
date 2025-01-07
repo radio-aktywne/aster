@@ -13,9 +13,6 @@ You can configure the app at runtime using various environment variables:
 - `ASTER__SERVER__PORT` -
   port to run the server on
   (default: `10110`)
-- `ASTER__COOKIES__DOMAIN` -
-  domain for the cookies
-  (default: ``)
 - `ASTER__SECRETS__AUTH` -
   secrets for encrypting auth cookies
   (default: `secret`)

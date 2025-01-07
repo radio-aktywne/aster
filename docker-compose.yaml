@@ -6,7 +6,6 @@ services:
     environment:
       - "ASTER__SERVER__HOST=${ASTER__SERVER__HOST:-0.0.0.0}"
       - "ASTER__SERVER__PORT=${ASTER__SERVER__PORT:-10110}"
-      - "ASTER__COOKIES__DOMAIN=${ASTER__COOKIES__DOMAIN:-}"
       - "ASTER__SECRETS__AUTH=${ASTER__SECRETS__AUTH:-secret}"
       - "ASTER__URLS__PUBLIC=${ASTER__URLS__PUBLIC:-http://localhost:10110}"
       - "ASTER__DINGO__HTTP__SCHEME=${ASTER__DINGO__HTTP__SCHEME:-http}"
