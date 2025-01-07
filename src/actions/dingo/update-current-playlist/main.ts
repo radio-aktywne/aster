@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "../../../auth";
+import { getSession } from "../../../lib/auth/get-session";
 import { DingoError } from "../../../lib/dingo/errors";
 import { updateCurrentPlaylist as internalUpdateCurrentPlaylist } from "../../../lib/dingo/update-current-playlist";
 import { errors } from "./constants";
@@ -13,7 +13,7 @@ import {
 export async function updateCurrentPlaylist(
   input: UpdateCurrentPlaylistInput,
 ): Promise<UpdateCurrentPlaylistOutput> {
-  const session = await auth.auth();
+  const { session } = await getSession();
   if (!session) return { error: errors.unauthorized };
 
   const parsed = inputSchema.safeParse(input);
