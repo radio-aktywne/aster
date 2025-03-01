@@ -25,21 +25,21 @@ msgstr "An error occurred while listing playlists."
 msgid "An error occurred while updating current playlist."
 msgstr "An error occurred while updating current playlist."
 
-#: src/app/(protected)/page.tsx:16
-#: src/app/(protected)/page.tsx:17
-#: src/app/auth/error/page.tsx:17
-#: src/app/layout.tsx:19
-#: src/app/layout.tsx:20
-#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
-#: src/components/metadata/root/root-error-metadata/main.tsx:13
-#: src/components/metadata/root/root-not-found-metadata/main.tsx:13
 #: src/components/metadata/root/root-page-metadata/main.tsx:13
 #: src/components/metadata/root/root-page-metadata/main.tsx:14
+#: src/components/metadata/root/root-not-found-metadata/main.tsx:13
+#: src/components/metadata/root/root-error-metadata/main.tsx:13
+#: src/components/metadata/auth/auth-error-page-metadata/main.tsx:13
+#: src/app/layout.tsx:19
+#: src/app/layout.tsx:20
+#: src/app/auth/error/page.tsx:17
+#: src/app/(protected)/page.tsx:16
+#: src/app/(protected)/page.tsx:17
 msgid "aster"
 msgstr "aster"
 
-#: src/app/auth/error/page.tsx:18
 #: src/components/metadata/auth/auth-error-page-metadata/main.tsx:14
+#: src/app/auth/error/page.tsx:18
 msgid "Auth error • aster"
 msgstr "Auth error • aster"
 
@@ -59,8 +59,8 @@ msgstr "Error in auth flow"
 msgid "Info"
 msgstr "Info"
 
-#: src/actions/dingo/update-current-playlist/constants.ts:7
 #: src/actions/pelican/list-playlists/constants.ts:5
+#: src/actions/dingo/update-current-playlist/constants.ts:7
 msgid "Invalid input."
 msgstr "Invalid input."
 

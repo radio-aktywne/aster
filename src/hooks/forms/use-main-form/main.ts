@@ -16,10 +16,7 @@ export function useMainForm({
 }: UseMainFormInput): UseMainFormOutput {
   const form = useForm<UseMainFormValues>({
     initialValues: {
-      playlist:
-        initialValues?.playlist === undefined
-          ? defaultValues.playlist
-          : initialValues.playlist,
+      playlist: initialValues?.playlist ?? defaultValues.playlist,
     },
     validate: validate,
   });
