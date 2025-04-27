@@ -64,7 +64,7 @@ msgstr "Info"
 msgid "Invalid input."
 msgstr "Invalid input."
 
-#: src/components/layouts/session-layout/components/user-menu/components/logout-button/main.tsx:23
+#: src/components/layouts/session-layout/main.tsx:30
 msgid "Logout"
 msgstr "Logout"
 
@@ -76,7 +76,7 @@ msgstr "Not Found • aster"
 msgid "Page not found"
 msgstr "Page not found"
 
-#: src/components/widgets/main-widget/components/main-form/main.tsx:52
+#: src/components/widgets/main-widget/components/main-form/main.tsx:55
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -92,7 +92,7 @@ msgstr "Playlist updated successfully"
 msgid "Retry"
 msgstr "Retry"
 
-#: src/components/widgets/main-widget/components/main-form/main.tsx:57
+#: src/components/widgets/main-widget/components/main-form/main.tsx:60
 msgid "Save"
 msgstr "Save"
 

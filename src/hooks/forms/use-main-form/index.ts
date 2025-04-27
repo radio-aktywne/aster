@@ -1,6 +1,5 @@
 export { useMainForm } from "./main";
 export type {
-  UseMainFormAllowedValues,
   UseMainFormDefaultValues,
   UseMainFormInitialValues,
   UseMainFormInput,
