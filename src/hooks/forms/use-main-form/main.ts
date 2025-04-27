@@ -1,9 +1,7 @@
 import { useForm } from "@mantine/form";
 import "client-only";
-import { useMemo } from "react";
 
-import { useListPlaylists } from "../../pelican/use-list-playlists";
-import { defaultValues, playlistsLimit } from "./constants";
+import { defaultValues } from "./constants";
 import {
   UseMainFormInput,
   UseMainFormOutput,
@@ -21,21 +19,8 @@ export function useMainForm({
     validate: validate,
   });
 
-  const { data: playlists, loading: playlistsLoading } = useListPlaylists({
-    limit: playlistsLimit,
-  });
-
-  const allowedValues = useMemo(
-    () => ({
-      playlist: playlists?.playlists.map((playlist) => playlist.id) ?? [],
-    }),
-    [playlists],
-  );
-
   return {
-    allowedValues,
     defaultValues,
     form,
-    loading: playlistsLoading,
   };
 }

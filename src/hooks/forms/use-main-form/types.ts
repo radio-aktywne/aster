@@ -12,10 +12,6 @@ export type UseMainFormValidators = {
   ) => null | string | undefined;
 };
 
-export type UseMainFormAllowedValues = {
-  playlist: string[];
-};
-
 export type UseMainFormDefaultValues = Partial<UseMainFormValues>;
 
 export type UseMainFormInput = {
@@ -24,8 +20,6 @@ export type UseMainFormInput = {
 };
 
 export type UseMainFormOutput = {
-  allowedValues: UseMainFormAllowedValues;
   defaultValues: UseMainFormDefaultValues;
   form: UseFormReturnType<UseMainFormValues>;
-  loading: boolean;
 };

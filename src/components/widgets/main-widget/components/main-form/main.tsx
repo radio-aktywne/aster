@@ -9,6 +9,8 @@ import {
   useMainForm,
   UseMainFormValues,
 } from "../../../../../hooks/forms/use-main-form";
+import { useListPlaylists } from "../../../../../hooks/pelican/use-list-playlists";
+import { playlistsLimit } from "./constants";
 import { MainFormInput } from "./types";
 import { getPlaylistLabel } from "./utils";
 
@@ -17,7 +19,11 @@ export function MainForm({ initialValues, onSave, validate }: MainFormInput) {
 
   const { _ } = useLingui();
 
-  const { allowedValues, form, loading } = useMainForm({
+  const { data: playlists, loading: playlistsLoading } = useListPlaylists({
+    limit: playlistsLimit,
+  });
+
+  const { form } = useMainForm({
     initialValues: initialValues,
     validate: validate,
   });
@@ -37,11 +43,11 @@ export function MainForm({ initialValues, onSave, validate }: MainFormInput) {
     [formSetErrors, onSave],
   );
 
-  if (loading) return <Loader />;
+  if (playlistsLoading) return <Loader />;
 
-  const playlistSelectData = allowedValues.playlist.map((value) => ({
-    label: getPlaylistLabel(value),
-    value: value,
+  const playlistSelectData = playlists?.playlists.map((playlist) => ({
+    label: getPlaylistLabel(playlist),
+    value: playlist.id,
   }));
 
   return (
