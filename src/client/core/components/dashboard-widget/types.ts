@@ -1,0 +1,1 @@
+export type DashboardWidgetInput = object;
