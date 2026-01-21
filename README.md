@@ -15,7 +15,8 @@ Broadcast composing app 🧼
 
 ## 💡 About
 
-`aster` is a web app for broadcast composing with Liquidsoap.
+`aster` is a [`Next.js`](https://nextjs.org) app
+for managing broadcast composing.
 
 ## 📄 Further Reading
 
