@@ -17,7 +17,7 @@ import { DashboardForm } from "./components/dashboard-form";
 export function DashboardWidget({}: DashboardWidgetInput) {
   const { notifications } = useNotifications();
 
-  const { data: getCurrentPlaylistData } = useSuspenseQuery(
+  const getCurrentPlaylistQuery = useSuspenseQuery(
     orpcClientSideQueryClient.core.getCurrentPlaylist.queryOptions(),
   );
 
@@ -26,8 +26,8 @@ export function DashboardWidget({}: DashboardWidgetInput) {
   );
 
   const initialValues = useMemo(
-    () => ({ playlist: getCurrentPlaylistData?.id || null }),
-    [getCurrentPlaylistData?.id],
+    () => ({ playlist: getCurrentPlaylistQuery.data?.id || null }),
+    [getCurrentPlaylistQuery.data?.id],
   );
 
   const handleSubmit = useCallback(

@@ -17,7 +17,7 @@ export async function HomePageView({}: PageViewInput<
 
   void queryClient.prefetchQuery(
     orpcServerSideQueryClient.core.listPlaylists.queryOptions({
-      input: { limit: null },
+      input: { limit: "null" },
     }),
   );
 

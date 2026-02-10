@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-01-01 00:00+0000\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: aster\n"
+"Language: pl\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
 "X-Generator: @lingui/cli\n"
-"Language: pl\n"
-"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -58,7 +58,7 @@ msgstr "Nie znaleziono • aster"
 msgid "Page not found"
 msgstr "Nie znaleziono strony"
 
-#: src/client/core/components/dashboard-widget/components/dashboard-form/main.tsx:42
+#: src/client/core/components/dashboard-widget/components/dashboard-form/main.tsx:44
 msgid "Playlist"
 msgstr "Playlista"
 
@@ -74,7 +74,7 @@ msgstr "Playlista została pomyślnie zaktualizowana"
 msgid "Retry"
 msgstr "Spróbuj ponownie"
 
-#: src/client/core/components/dashboard-widget/components/dashboard-form/main.tsx:47
+#: src/client/core/components/dashboard-widget/components/dashboard-form/main.tsx:49
 msgid "Save"
 msgstr "Zapisz"
 
@@ -94,6 +94,6 @@ msgstr "Sukces"
 msgid "Warning"
 msgstr "Ostrzeżenie"
 
-#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:28
+#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:27
 msgid "Why did the chicken cross the road? To get to the other side."
 msgstr "Dlaczego kura przeszła przez ulicę? Żeby dostać się na drugą stronę."
