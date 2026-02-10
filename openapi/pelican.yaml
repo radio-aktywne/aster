@@ -1,7 +1,7 @@
 openapi: "3.1.0"
 info:
   title: pelican
-  version: "0.10.0"
+  version: "0.11.0"
 paths:
   /bindings:
     get:
@@ -15,12 +15,16 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: integer
-                default: 10
+              - anyOf:
+                  - $ref: "#/components/schemas/bindings_models_ListRequestLimit"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/bindings_models_ListRequestLimit"
+                title: ListRequestLimit
               - type: "null"
-            description: Maximum number of bindings to return.
-            default: 10
-          description: Maximum number of bindings to return.
+            description: Maximum number of bindings to return. Default is 10.
+          description: Maximum number of bindings to return. Default is 10.
           required: false
           deprecated: false
           allowEmptyValue: false
@@ -29,7 +33,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: integer
+              - anyOf:
+                  - $ref: "#/components/schemas/bindings_models_ListRequestOffset"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/bindings_models_ListRequestOffset"
+                title: ListRequestOffset
               - type: "null"
             description: Number of bindings to skip.
           description: Number of bindings to skip.
@@ -41,7 +51,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/bindings_models_ListRequestWhere"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/bindings_models_ListRequestWhere"
+                title: ListRequestWhere
               - type: "null"
             description: Filter to apply to find bindings.
           description: Filter to apply to find bindings.
@@ -53,7 +69,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/bindings_models_ListRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/bindings_models_ListRequestInclude"
+                title: ListRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -65,7 +87,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/bindings_models_ListRequestOrder"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/bindings_models_ListRequestOrder"
+                title: ListRequestOrder
               - type: "null"
             description: Order to apply to the results.
           description: Order to apply to the results.
@@ -80,7 +108,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BindingList"
+                $ref: "#/components/schemas/bindings_models_ListResponseResults"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -118,7 +146,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/bindings_models_CreateRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/bindings_models_CreateRequestInclude"
+                title: CreateRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -130,7 +164,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BindingCreateInput"
+              $ref: "#/components/schemas/bindings_models_CreateRequestData"
         required: true
       responses:
         "201":
@@ -139,7 +173,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/bindings_models_Binding"
+                $ref: "#/components/schemas/CreateResponseBinding"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -177,17 +211,20 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the binding to get.
-          description: Identifier of the binding to get.
+            $ref: "#/components/schemas/bindings_models_GetRequestId"
           required: true
           deprecated: false
         - name: include
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/bindings_models_GetRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/bindings_models_GetRequestInclude"
+                title: GetRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -202,7 +239,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/bindings_models_Binding"
+                $ref: "#/components/schemas/GetResponseBinding"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -239,10 +276,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the binding to delete.
-          description: Identifier of the binding to delete.
+            $ref: "#/components/schemas/bindings_models_DeleteRequestId"
           required: true
           deprecated: false
       responses:
@@ -284,17 +318,20 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the binding to update.
-          description: Identifier of the binding to update.
+            $ref: "#/components/schemas/bindings_models_UpdateRequestId"
           required: true
           deprecated: false
         - name: include
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/bindings_models_UpdateRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/bindings_models_UpdateRequestInclude"
+                title: UpdateRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -306,7 +343,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BindingUpdateInput"
+              $ref: "#/components/schemas/bindings_models_UpdateRequestData"
         required: true
       responses:
         "200":
@@ -315,7 +352,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/bindings_models_Binding"
+                $ref: "#/components/schemas/UpdateResponseBinding"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -354,12 +391,16 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: integer
-                default: 10
+              - anyOf:
+                  - $ref: "#/components/schemas/media_models_ListRequestLimit"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/media_models_ListRequestLimit"
+                title: ListRequestLimit
               - type: "null"
-            description: Maximum number of media to return.
-            default: 10
-          description: Maximum number of media to return.
+            description: Maximum number of media to return. Default is 10.
+          description: Maximum number of media to return. Default is 10.
           required: false
           deprecated: false
           allowEmptyValue: false
@@ -368,7 +409,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: integer
+              - anyOf:
+                  - $ref: "#/components/schemas/media_models_ListRequestOffset"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/media_models_ListRequestOffset"
+                title: ListRequestOffset
               - type: "null"
             description: Number of media to skip.
           description: Number of media to skip.
@@ -380,7 +427,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/media_models_ListRequestWhere"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/media_models_ListRequestWhere"
+                title: ListRequestWhere
               - type: "null"
             description: Filter to apply to find media.
           description: Filter to apply to find media.
@@ -392,7 +445,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/media_models_ListRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/media_models_ListRequestInclude"
+                title: ListRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -404,7 +463,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/media_models_ListRequestOrder"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/media_models_ListRequestOrder"
+                title: ListRequestOrder
               - type: "null"
             description: Order to apply to the results.
           description: Order to apply to the results.
@@ -419,7 +484,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MediaList"
+                $ref: "#/components/schemas/media_models_ListResponseResults"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -457,7 +522,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/media_models_CreateRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/media_models_CreateRequestInclude"
+                title: CreateRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -469,7 +540,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MediaCreateInput"
+              $ref: "#/components/schemas/media_models_CreateRequestData"
         required: true
       responses:
         "201":
@@ -478,7 +549,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/media_models_Media"
+                $ref: "#/components/schemas/CreateResponseMedia"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -516,17 +587,20 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the media to get.
-          description: Identifier of the media to get.
+            $ref: "#/components/schemas/media_models_GetRequestId"
           required: true
           deprecated: false
         - name: include
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/media_models_GetRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/media_models_GetRequestInclude"
+                title: GetRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -541,7 +615,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/media_models_Media"
+                $ref: "#/components/schemas/GetResponseMedia"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -578,10 +652,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the media to delete.
-          description: Identifier of the media to delete.
+            $ref: "#/components/schemas/media_models_DeleteRequestId"
           required: true
           deprecated: false
       responses:
@@ -623,17 +694,20 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the media to update.
-          description: Identifier of the media to update.
+            $ref: "#/components/schemas/media_models_UpdateRequestId"
           required: true
           deprecated: false
         - name: include
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/media_models_UpdateRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/media_models_UpdateRequestInclude"
+                title: UpdateRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -645,7 +719,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MediaUpdateInput"
+              $ref: "#/components/schemas/media_models_UpdateRequestData"
         required: true
       responses:
         "200":
@@ -654,7 +728,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/media_models_Media"
+                $ref: "#/components/schemas/UpdateResponseMedia"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -692,10 +766,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the media to download content for.
-          description: Identifier of the media to download content for.
+            $ref: "#/components/schemas/DownloadRequestId"
           required: true
           deprecated: false
       responses:
@@ -740,16 +811,19 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the media to upload content for.
-          description: Identifier of the media to upload content for.
+            $ref: "#/components/schemas/UploadRequestId"
           required: true
           deprecated: false
         - name: Content-Type
           in: header
           schema:
-            type: string
+            anyOf:
+              - $ref: "#/components/schemas/UploadRequestType"
+              - type: string
+                contentMediaType: application/json
+                contentSchema:
+                  $ref: "#/components/schemas/UploadRequestType"
+            title: UploadRequestType
             description: Content type.
           description: Content type.
           required: true
@@ -793,10 +867,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the media to get content headers for.
-          description: Identifier of the media to get content headers for.
+            $ref: "#/components/schemas/DownloadRequestId"
           required: true
           deprecated: false
       responses:
@@ -861,12 +932,16 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: integer
-                default: 10
+              - anyOf:
+                  - $ref: "#/components/schemas/playlists_models_ListRequestLimit"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/playlists_models_ListRequestLimit"
+                title: ListRequestLimit
               - type: "null"
-            description: Maximum number of playlists to return.
-            default: 10
-          description: Maximum number of playlists to return.
+            description: Maximum number of playlists to return. Default is 10.
+          description: Maximum number of playlists to return. Default is 10.
           required: false
           deprecated: false
           allowEmptyValue: false
@@ -875,7 +950,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: integer
+              - anyOf:
+                  - $ref: "#/components/schemas/playlists_models_ListRequestOffset"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/playlists_models_ListRequestOffset"
+                title: ListRequestOffset
               - type: "null"
             description: Number of playlists to skip.
           description: Number of playlists to skip.
@@ -887,7 +968,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/playlists_models_ListRequestWhere"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/playlists_models_ListRequestWhere"
+                title: ListRequestWhere
               - type: "null"
             description: Filter to apply to find playlists.
           description: Filter to apply to find playlists.
@@ -899,7 +986,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/playlists_models_ListRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/playlists_models_ListRequestInclude"
+                title: ListRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -911,7 +1004,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/playlists_models_ListRequestOrder"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/playlists_models_ListRequestOrder"
+                title: ListRequestOrder
               - type: "null"
             description: Order to apply to the results.
           description: Order to apply to the results.
@@ -926,7 +1025,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PlaylistList"
+                $ref: "#/components/schemas/playlists_models_ListResponseResults"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -964,7 +1063,13 @@ paths:
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/playlists_models_CreateRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/playlists_models_CreateRequestInclude"
+                title: CreateRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -976,7 +1081,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PlaylistCreateInput"
+              $ref: "#/components/schemas/playlists_models_CreateRequestData"
         required: true
       responses:
         "201":
@@ -985,7 +1090,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/playlists_models_Playlist"
+                $ref: "#/components/schemas/CreateResponsePlaylist"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -1023,17 +1128,20 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the playlist to get.
-          description: Identifier of the playlist to get.
+            $ref: "#/components/schemas/playlists_models_GetRequestId"
           required: true
           deprecated: false
         - name: include
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/playlists_models_GetRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/playlists_models_GetRequestInclude"
+                title: GetRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -1048,7 +1156,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/playlists_models_Playlist"
+                $ref: "#/components/schemas/GetResponsePlaylist"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -1085,10 +1193,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the playlist to delete.
-          description: Identifier of the playlist to delete.
+            $ref: "#/components/schemas/playlists_models_DeleteRequestId"
           required: true
           deprecated: false
       responses:
@@ -1130,17 +1235,20 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the playlist to update.
-          description: Identifier of the playlist to update.
+            $ref: "#/components/schemas/playlists_models_UpdateRequestId"
           required: true
           deprecated: false
         - name: include
           in: query
           schema:
             oneOf:
-              - type: string
+              - anyOf:
+                  - $ref: "#/components/schemas/playlists_models_UpdateRequestInclude"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/playlists_models_UpdateRequestInclude"
+                title: UpdateRequestInclude
               - type: "null"
             description: Relations to include in the response.
           description: Relations to include in the response.
@@ -1152,7 +1260,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PlaylistUpdateInput"
+              $ref: "#/components/schemas/playlists_models_UpdateRequestData"
         required: true
       responses:
         "200":
@@ -1161,7 +1269,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/playlists_models_Playlist"
+                $ref: "#/components/schemas/UpdateResponsePlaylist"
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -1199,10 +1307,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the playlist to get.
-          description: Identifier of the playlist to get.
+            $ref: "#/components/schemas/M3URequestId"
           required: true
           deprecated: false
       responses:
@@ -1255,10 +1360,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: string
-            format: uuid
-            description: Identifier of the playlist to get.
-          description: Identifier of the playlist to get.
+            $ref: "#/components/schemas/HeadM3URequestId"
           required: true
           deprecated: false
       responses:
@@ -1305,325 +1407,2225 @@ paths:
               schema:
                 type: string
       deprecated: false
+  /test:
+    get:
+      tags:
+        - Test
+      summary: Test
+      description: Test.
+      operationId: TestTest
+      parameters:
+        - name: parameters
+          in: query
+          schema:
+            oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/TestRequestParameters"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/TestRequestParameters"
+                title: TestRequestParameters
+              - type: "null"
+            description: Parameters for testing.
+          description: Parameters for testing.
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
+      responses:
+        "200":
+          description: Request fulfilled, document follows
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestResponseResult"
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
+      deprecated: false
 components:
   schemas:
-    BindingCreateInput:
+    BindingInclude:
       properties:
-        id:
-          type: string
-        playlistId:
-          type: string
-        mediaId:
-          type: string
-        rank:
-          type: string
-      type: object
-      required:
-        - mediaId
-        - playlistId
-        - rank
-      title: BindingCreateInput
-      description: Data to create a binding.
-    BindingList:
-      properties:
-        count:
-          type: integer
-          description: Total number of bindings that matched the query.
-        limit:
-          oneOf:
-            - type: integer
-            - type: "null"
-          description: Maximum number of returned bindings.
-        offset:
-          oneOf:
-            - type: integer
-            - type: "null"
-          description: Number of bindings skipped.
-        bindings:
-          items:
-            $ref: "#/components/schemas/bindings_models_Binding"
-          type: array
-          description: Bindings that matched the request.
-      type: object
-      required:
-        - bindings
-        - count
-      title: BindingList
-    BindingUpdateInput:
-      properties:
-        id:
-          type: string
-        rank:
-          type: string
-      type: object
-      required: []
-      title: BindingUpdateInput
-      description: Data to update a binding.
-    MediaCreateInput:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      type: object
-      required:
-        - name
-      title: MediaCreateInput
-      description: Data to create media.
-    MediaList:
-      properties:
-        count:
-          type: integer
-          description: Total number of media that matched the query.
-        limit:
-          oneOf:
-            - type: integer
-            - type: "null"
-          description: Maximum number of returned media.
-        offset:
-          oneOf:
-            - type: integer
-            - type: "null"
-          description: Number of media skipped.
+        playlist:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/bindings_models_PlaylistArgsFromBinding"
+          title: Playlist
         media:
-          items:
-            $ref: "#/components/schemas/media_models_Media"
-          type: array
-          description: Media that matched the request.
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/bindings_models_MediaArgsFromBinding"
+          title: Media
       type: object
-      required:
-        - count
-        - media
-      title: MediaList
-    MediaUpdateInput:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      type: object
-      required: []
-      title: MediaUpdateInput
-      description: Data to update media.
-    PlaylistCreateInput:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      type: object
-      required:
-        - name
-      title: PlaylistCreateInput
-      description: Data to create a playlist.
-    PlaylistList:
-      properties:
-        count:
-          type: integer
-          description: Total number of playlists that matched the query.
-        limit:
-          oneOf:
-            - type: integer
-            - type: "null"
-          description: Maximum number of returned playlists.
-        offset:
-          oneOf:
-            - type: integer
-            - type: "null"
-          description: Number of playlists skipped.
-        playlists:
-          items:
-            $ref: "#/components/schemas/playlists_models_Playlist"
-          type: array
-          description: Playlists that matched the request.
-      type: object
-      required:
-        - count
-        - playlists
-      title: PlaylistList
-    PlaylistUpdateInput:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      type: object
-      required: []
-      title: PlaylistUpdateInput
-      description: Data to update a playlist.
-    bindings_models_Binding:
+      title: BindingInclude
+      description: Binding relational arguments
+    BindingOrderByInput:
+      anyOf:
+        - $ref: "#/components/schemas/bindings_models__Binding_id_OrderByInput"
+        - $ref: "#/components/schemas/bindings_models__Binding_playlistId_OrderByInput"
+        - $ref: "#/components/schemas/bindings_models__Binding_mediaId_OrderByInput"
+        - $ref: "#/components/schemas/bindings_models__Binding_rank_OrderByInput"
+    CreateResponseBinding:
+      $ref: "#/components/schemas/bindings_models_Binding"
+    CreateResponseMedia:
+      $ref: "#/components/schemas/media_models_Media"
+    CreateResponsePlaylist:
+      $ref: "#/components/schemas/playlists_models_Playlist"
+    DownloadRequestId:
+      type: string
+      format: uuid
+    GetResponseBinding:
       properties:
         id:
           type: string
           format: uuid
+          title: Id
           description: Identifier of the binding.
         playlistId:
           type: string
           format: uuid
+          title: Playlistid
           description: Identifier of the playlist that the binding belongs to.
         mediaId:
           type: string
           format: uuid
+          title: Mediaid
           description: Identifier of the media that the binding belongs to.
         rank:
           type: string
+          title: Rank
           description: Rank of the media in the binding.
         playlist:
-          oneOf:
+          anyOf:
             - $ref: "#/components/schemas/bindings_models_Playlist"
             - type: "null"
           description: Playlist that the binding belongs to.
         media:
-          oneOf:
+          anyOf:
             - $ref: "#/components/schemas/bindings_models_Media"
             - type: "null"
           description: Media that the binding belongs to.
       type: object
       required:
         - id
-        - mediaId
         - playlistId
+        - mediaId
         - rank
+        - playlist
+        - media
       title: Binding
+      description: Binding data.
+    GetResponseMedia:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Identifier of the media.
+        name:
+          type: string
+          title: Name
+          description: Name of the media.
+        bindings:
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/media_models_Binding"
+              type: array
+            - type: "null"
+          title: Bindings
+          description: Bindings that the media belongs to.
+      type: object
+      required:
+        - id
+        - name
+        - bindings
+      title: Media
+      description: Media data.
+    GetResponsePlaylist:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Identifier of the playlist.
+        name:
+          type: string
+          title: Name
+          description: Name of the playlist.
+        bindings:
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/playlists_models_Binding"
+              type: array
+            - type: "null"
+          title: Bindings
+          description: Bindings that the playlist belongs to.
+      type: object
+      required:
+        - id
+        - name
+        - bindings
+      title: Playlist
+      description: Playlist data.
+    HeadM3URequestId:
+      type: string
+      format: uuid
+    M3URequestId:
+      type: string
+      format: uuid
+    MediaInclude:
+      properties:
+        bindings:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/media_models_FindManyBindingArgsFromMedia"
+          title: Bindings
+      type: object
+      title: MediaInclude
+      description: Media relational arguments
+    MediaOrderByInput:
+      anyOf:
+        - $ref: "#/components/schemas/_Media_id_OrderByInput"
+        - $ref: "#/components/schemas/_Media_name_OrderByInput"
+    Parameters:
+      properties:
+        message:
+          anyOf:
+            - type: string
+            - type: "null"
+          title: Message
+          description: Optional message to include in the test.
+          default: null
+      type: object
+      title: Parameters
+      description: Parameters for testing.
+    PlaylistInclude:
+      properties:
+        bindings:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/playlists_models_FindManyBindingArgsFromPlaylist"
+          title: Bindings
+      type: object
+      title: PlaylistInclude
+      description: Playlist relational arguments
+    PlaylistOrderByInput:
+      anyOf:
+        - $ref: "#/components/schemas/_Playlist_id_OrderByInput"
+        - $ref: "#/components/schemas/_Playlist_name_OrderByInput"
+    TestRequestParameters:
+      anyOf:
+        - $ref: "#/components/schemas/Parameters"
+        - type: "null"
+    TestResponseResult:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Indicates if the test was successful.
+        message:
+          type: string
+          title: Message
+          description: Message returned from the test.
+      type: object
+      required:
+        - success
+        - message
+      title: Result
+      description: Result of the test.
+    UpdateResponseBinding:
+      $ref: "#/components/schemas/bindings_models_Binding"
+    UpdateResponseMedia:
+      $ref: "#/components/schemas/media_models_Media"
+    UpdateResponsePlaylist:
+      $ref: "#/components/schemas/playlists_models_Playlist"
+    UploadRequestId:
+      type: string
+      format: uuid
+    UploadRequestType:
+      type: string
+    _Media_id_OrderByInput:
+      properties:
+        id:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Id
+      type: object
+      required:
+        - id
+      title: _Media_id_OrderByInput
+    _Media_name_OrderByInput:
+      properties:
+        name:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Name
+      type: object
+      required:
+        - name
+      title: _Media_name_OrderByInput
+    _Playlist_id_OrderByInput:
+      properties:
+        id:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Id
+      type: object
+      required:
+        - id
+      title: _Playlist_id_OrderByInput
+    _Playlist_name_OrderByInput:
+      properties:
+        name:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Name
+      type: object
+      required:
+        - name
+      title: _Playlist_name_OrderByInput
+    bindings_models_Binding:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Identifier of the binding.
+        playlistId:
+          type: string
+          format: uuid
+          title: Playlistid
+          description: Identifier of the playlist that the binding belongs to.
+        mediaId:
+          type: string
+          format: uuid
+          title: Mediaid
+          description: Identifier of the media that the binding belongs to.
+        rank:
+          type: string
+          title: Rank
+          description: Rank of the media in the binding.
+        playlist:
+          anyOf:
+            - $ref: "#/components/schemas/bindings_models_Playlist"
+            - type: "null"
+          description: Playlist that the binding belongs to.
+        media:
+          anyOf:
+            - $ref: "#/components/schemas/bindings_models_Media"
+            - type: "null"
+          description: Media that the binding belongs to.
+      type: object
+      required:
+        - id
+        - playlistId
+        - mediaId
+        - rank
+        - playlist
+        - media
+      title: Binding
+      description: Binding data.
+    bindings_models_BindingIncludeFromBinding:
+      properties:
+        playlist:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/bindings_models_PlaylistArgsFromBinding"
+          title: Playlist
+        media:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/bindings_models_MediaArgsFromBinding"
+          title: Media
+      type: object
+      title: BindingIncludeFromBinding
+      description: Relational arguments for Binding
+    bindings_models_BindingListRelationFilter:
+      properties:
+        some:
+          $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+        none:
+          $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+        every:
+          $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+      type: object
+      title: BindingListRelationFilter
+    bindings_models_BindingWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Id
+        playlistId:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Playlistid
+        mediaId:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Mediaid
+        rank:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Rank
+        playlist:
+          $ref: "#/components/schemas/bindings_models_PlaylistRelationFilter"
+        media:
+          $ref: "#/components/schemas/bindings_models_MediaRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: BindingWhereInput
+      description: Binding arguments for searching
+    bindings_models_CreateRequestData:
+      properties:
+        id:
+          type: string
+          title: Id
+        playlistId:
+          type: string
+          title: Playlistid
+          description: Identifier of the playlist.
+        mediaId:
+          type: string
+          title: Mediaid
+          description: Identifier of the media.
+        rank:
+          type: string
+          title: Rank
+          description: Rank of the binding.
+      type: object
+      required:
+        - playlistId
+        - mediaId
+        - rank
+      title: BindingCreateInput
+      description: Required arguments to the Binding create method.
+    bindings_models_CreateRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/BindingInclude"
+        - type: "null"
+    bindings_models_DeleteRequestId:
+      type: string
+      format: uuid
+    bindings_models_FindManyBindingArgsFromMedia:
+      properties:
+        take:
+          type: integer
+          title: Take
+        skip:
+          type: integer
+          title: Skip
+        orderBy:
+          anyOf:
+            - $ref: "#/components/schemas/bindings_models__Binding_id_OrderByInput"
+            - $ref: "#/components/schemas/bindings_models__Binding_playlistId_OrderByInput"
+            - $ref: "#/components/schemas/bindings_models__Binding_mediaId_OrderByInput"
+            - $ref: "#/components/schemas/bindings_models__Binding_rank_OrderByInput"
+            - $ref: "#/components/schemas/bindings_models__Binding_RelevanceOrderByInput"
+            - items:
+                anyOf:
+                  - $ref: "#/components/schemas/bindings_models__Binding_id_OrderByInput"
+                  - $ref: "#/components/schemas/bindings_models__Binding_playlistId_OrderByInput"
+                  - $ref: "#/components/schemas/bindings_models__Binding_mediaId_OrderByInput"
+                  - $ref: "#/components/schemas/bindings_models__Binding_rank_OrderByInput"
+                  - $ref: "#/components/schemas/bindings_models__Binding_RelevanceOrderByInput"
+              type: array
+          title: Orderby
+        where:
+          $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+        cursor:
+          anyOf:
+            - $ref: "#/components/schemas/bindings_models__BindingWhereUnique_id_Input"
+            - $ref: "#/components/schemas/bindings_models__BindingCompoundplaylistId_rankKey"
+          title: Cursor
+        distinct:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Distinct
+        include:
+          $ref: "#/components/schemas/bindings_models_BindingIncludeFromBinding"
+      type: object
+      title: FindManyBindingArgsFromMedia
+      description: Arguments for Media
+    bindings_models_FindManyBindingArgsFromPlaylist:
+      properties:
+        take:
+          type: integer
+          title: Take
+        skip:
+          type: integer
+          title: Skip
+        orderBy:
+          anyOf:
+            - $ref: "#/components/schemas/bindings_models__Binding_id_OrderByInput"
+            - $ref: "#/components/schemas/bindings_models__Binding_playlistId_OrderByInput"
+            - $ref: "#/components/schemas/bindings_models__Binding_mediaId_OrderByInput"
+            - $ref: "#/components/schemas/bindings_models__Binding_rank_OrderByInput"
+            - $ref: "#/components/schemas/bindings_models__Binding_RelevanceOrderByInput"
+            - items:
+                anyOf:
+                  - $ref: "#/components/schemas/bindings_models__Binding_id_OrderByInput"
+                  - $ref: "#/components/schemas/bindings_models__Binding_playlistId_OrderByInput"
+                  - $ref: "#/components/schemas/bindings_models__Binding_mediaId_OrderByInput"
+                  - $ref: "#/components/schemas/bindings_models__Binding_rank_OrderByInput"
+                  - $ref: "#/components/schemas/bindings_models__Binding_RelevanceOrderByInput"
+              type: array
+          title: Orderby
+        where:
+          $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+        cursor:
+          anyOf:
+            - $ref: "#/components/schemas/bindings_models__BindingWhereUnique_id_Input"
+            - $ref: "#/components/schemas/bindings_models__BindingCompoundplaylistId_rankKey"
+          title: Cursor
+        distinct:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Distinct
+        include:
+          $ref: "#/components/schemas/bindings_models_BindingIncludeFromBinding"
+      type: object
+      title: FindManyBindingArgsFromPlaylist
+      description: Arguments for Playlist
+    bindings_models_GetRequestId:
+      type: string
+      format: uuid
+    bindings_models_GetRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/BindingInclude"
+        - type: "null"
+    bindings_models_ListRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/BindingInclude"
+        - type: "null"
+    bindings_models_ListRequestLimit:
+      anyOf:
+        - type: integer
+        - type: "null"
+    bindings_models_ListRequestOffset:
+      anyOf:
+        - type: integer
+        - type: "null"
+    bindings_models_ListRequestOrder:
+      anyOf:
+        - $ref: "#/components/schemas/BindingOrderByInput"
+        - items:
+            $ref: "#/components/schemas/BindingOrderByInput"
+          type: array
+        - type: "null"
+    bindings_models_ListRequestWhere:
+      anyOf:
+        - $ref: "#/components/schemas/bindings_models_BindingWhereInput"
+        - type: "null"
+    bindings_models_ListResponseResults:
+      properties:
+        count:
+          type: integer
+          title: Count
+          description: Total number of bindings that matched the query.
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          description: Maximum number of returned bindings.
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          description: Number of bindings skipped.
+        bindings:
+          items:
+            $ref: "#/components/schemas/bindings_models_Binding"
+          type: array
+          title: Bindings
+          description: Bindings that matched the request.
+      type: object
+      required:
+        - count
+        - limit
+        - offset
+        - bindings
+      title: BindingList
+      description: List of bindings.
     bindings_models_Media:
       properties:
         id:
           type: string
           format: uuid
+          title: Id
           description: Identifier of the media.
         name:
           type: string
+          title: Name
           description: Name of the media.
         bindings:
-          oneOf:
-            - items: {}
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/bindings_models_Binding"
               type: array
             - type: "null"
+          title: Bindings
           description: Bindings that the media belongs to.
       type: object
       required:
         - id
         - name
+        - bindings
       title: Media
+      description: Media data.
+    bindings_models_MediaArgsFromBinding:
+      properties:
+        include:
+          $ref: "#/components/schemas/bindings_models_MediaIncludeFromMedia"
+      type: object
+      title: MediaArgsFromBinding
+      description: Arguments for Binding
+    bindings_models_MediaIncludeFromMedia:
+      properties:
+        bindings:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/bindings_models_FindManyBindingArgsFromMedia"
+          title: Bindings
+      type: object
+      title: MediaIncludeFromMedia
+      description: Relational arguments for Media
+    bindings_models_MediaRelationFilter:
+      properties:
+        is:
+          $ref: "#/components/schemas/bindings_models_MediaWhereInput"
+        isNot:
+          $ref: "#/components/schemas/bindings_models_MediaWhereInput"
+      type: object
+      title: MediaRelationFilter
+    bindings_models_MediaWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Id
+        name:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Name
+        bindings:
+          $ref: "#/components/schemas/bindings_models_BindingListRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/bindings_models_MediaWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/bindings_models_MediaWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/bindings_models_MediaWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: MediaWhereInput
+      description: Media arguments for searching
     bindings_models_Playlist:
       properties:
         id:
           type: string
           format: uuid
+          title: Id
           description: Identifier of the playlist.
         name:
           type: string
+          title: Name
           description: Name of the playlist.
         bindings:
-          oneOf:
-            - items: {}
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/bindings_models_Binding"
               type: array
             - type: "null"
+          title: Bindings
           description: Bindings that the playlist belongs to.
       type: object
       required:
         - id
         - name
+        - bindings
       title: Playlist
+      description: Playlist data.
+    bindings_models_PlaylistArgsFromBinding:
+      properties:
+        include:
+          $ref: "#/components/schemas/bindings_models_PlaylistIncludeFromPlaylist"
+      type: object
+      title: PlaylistArgsFromBinding
+      description: Arguments for Binding
+    bindings_models_PlaylistIncludeFromPlaylist:
+      properties:
+        bindings:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/bindings_models_FindManyBindingArgsFromPlaylist"
+          title: Bindings
+      type: object
+      title: PlaylistIncludeFromPlaylist
+      description: Relational arguments for Playlist
+    bindings_models_PlaylistRelationFilter:
+      properties:
+        is:
+          $ref: "#/components/schemas/bindings_models_PlaylistWhereInput"
+        isNot:
+          $ref: "#/components/schemas/bindings_models_PlaylistWhereInput"
+      type: object
+      title: PlaylistRelationFilter
+    bindings_models_PlaylistWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Id
+        name:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Name
+        bindings:
+          $ref: "#/components/schemas/bindings_models_BindingListRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/bindings_models_PlaylistWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/bindings_models_PlaylistWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/bindings_models_PlaylistWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: PlaylistWhereInput
+      description: Playlist arguments for searching
+    bindings_models_StringFilter:
+      properties:
+        equals:
+          type: string
+          title: Equals
+        notIn:
+          items:
+            type: string
+          type: array
+          title: Notin
+        lt:
+          type: string
+          title: Lt
+        lte:
+          type: string
+          title: Lte
+        gt:
+          type: string
+          title: Gt
+        gte:
+          type: string
+          title: Gte
+        contains:
+          type: string
+          title: Contains
+        startswith:
+          type: string
+          title: Startswith
+        endswith:
+          type: string
+          title: Endswith
+        in:
+          items:
+            type: string
+          type: array
+          title: In
+        not:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/bindings_models_StringFilter"
+          title: Not
+        mode:
+          type: string
+          enum:
+            - default
+            - insensitive
+          title: Mode
+        search:
+          type: string
+          title: Search
+      type: object
+      title: StringFilter
+    bindings_models_UpdateRequestData:
+      properties:
+        id:
+          type: string
+          title: Id
+        rank:
+          type: string
+          title: Rank
+      type: object
+      title: BindingUpdateManyMutationInput
+      description: Arguments for updating many records
+    bindings_models_UpdateRequestId:
+      type: string
+      format: uuid
+    bindings_models_UpdateRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/BindingInclude"
+        - type: "null"
+    bindings_models__BindingCompoundplaylistId_rankKey:
+      properties:
+        playlistidRank:
+          $ref: "#/components/schemas/bindings_models__BindingCompoundplaylistId_rankKeyInner"
+      type: object
+      required:
+        - playlistidRank
+      title: _BindingCompoundplaylistId_rankKey
+    bindings_models__BindingCompoundplaylistId_rankKeyInner:
+      properties:
+        playlistId:
+          type: string
+          title: Playlistid
+        rank:
+          type: string
+          title: Rank
+      type: object
+      required:
+        - playlistId
+        - rank
+      title: _BindingCompoundplaylistId_rankKeyInner
+    bindings_models__BindingWhereUnique_id_Input:
+      properties:
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+        - id
+      title: _BindingWhereUnique_id_Input
+    bindings_models__Binding_RelevanceInner:
+      properties:
+        fields:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Fields
+        search:
+          type: string
+          title: Search
+        sort:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Sort
+      type: object
+      required:
+        - fields
+        - search
+        - sort
+      title: _Binding_RelevanceInner
+    bindings_models__Binding_RelevanceOrderByInput:
+      properties:
+        _relevance:
+          $ref: "#/components/schemas/bindings_models__Binding_RelevanceInner"
+      type: object
+      required:
+        - _relevance
+      title: _Binding_RelevanceOrderByInput
+    bindings_models__Binding_id_OrderByInput:
+      properties:
+        id:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Id
+      type: object
+      required:
+        - id
+      title: _Binding_id_OrderByInput
+    bindings_models__Binding_mediaId_OrderByInput:
+      properties:
+        mediaId:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Mediaid
+      type: object
+      required:
+        - mediaId
+      title: _Binding_mediaId_OrderByInput
+    bindings_models__Binding_playlistId_OrderByInput:
+      properties:
+        playlistId:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Playlistid
+      type: object
+      required:
+        - playlistId
+      title: _Binding_playlistId_OrderByInput
+    bindings_models__Binding_rank_OrderByInput:
+      properties:
+        rank:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Rank
+      type: object
+      required:
+        - rank
+      title: _Binding_rank_OrderByInput
     media_models_Binding:
       properties:
         id:
           type: string
           format: uuid
+          title: Id
           description: Identifier of the binding.
         playlistId:
           type: string
           format: uuid
+          title: Playlistid
           description: Identifier of the playlist that the binding belongs to.
         mediaId:
           type: string
           format: uuid
+          title: Mediaid
           description: Identifier of the media that the binding belongs to.
         rank:
           type: string
+          title: Rank
           description: Rank of the media in the binding.
         playlist:
+          anyOf:
+            - $ref: "#/components/schemas/media_models_Playlist"
+            - type: "null"
           description: Playlist that the binding belongs to.
         media:
+          anyOf:
+            - $ref: "#/components/schemas/media_models_Media"
+            - type: "null"
           description: Media that the binding belongs to.
       type: object
       required:
         - id
-        - media
-        - mediaId
-        - playlist
         - playlistId
+        - mediaId
         - rank
+        - playlist
+        - media
       title: Binding
+      description: Binding data.
+    media_models_BindingIncludeFromBinding:
+      properties:
+        playlist:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/media_models_PlaylistArgsFromBinding"
+          title: Playlist
+        media:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/media_models_MediaArgsFromBinding"
+          title: Media
+      type: object
+      title: BindingIncludeFromBinding
+      description: Relational arguments for Binding
+    media_models_BindingListRelationFilter:
+      properties:
+        some:
+          $ref: "#/components/schemas/media_models_BindingWhereInput"
+        none:
+          $ref: "#/components/schemas/media_models_BindingWhereInput"
+        every:
+          $ref: "#/components/schemas/media_models_BindingWhereInput"
+      type: object
+      title: BindingListRelationFilter
+    media_models_BindingWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Id
+        playlistId:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Playlistid
+        mediaId:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Mediaid
+        rank:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Rank
+        playlist:
+          $ref: "#/components/schemas/media_models_PlaylistRelationFilter"
+        media:
+          $ref: "#/components/schemas/media_models_MediaRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/media_models_BindingWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/media_models_BindingWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/media_models_BindingWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: BindingWhereInput
+      description: Binding arguments for searching
+    media_models_CreateRequestData:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+        - name
+      title: MediaCreateWithoutRelationsInput
+      description: >-
+        Required arguments to the Media create method, without relations
+    media_models_CreateRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/MediaInclude"
+        - type: "null"
+    media_models_DeleteRequestId:
+      type: string
+      format: uuid
+    media_models_FindManyBindingArgsFromMedia:
+      properties:
+        take:
+          type: integer
+          title: Take
+        skip:
+          type: integer
+          title: Skip
+        orderBy:
+          anyOf:
+            - $ref: "#/components/schemas/media_models__Binding_id_OrderByInput"
+            - $ref: "#/components/schemas/media_models__Binding_playlistId_OrderByInput"
+            - $ref: "#/components/schemas/media_models__Binding_mediaId_OrderByInput"
+            - $ref: "#/components/schemas/media_models__Binding_rank_OrderByInput"
+            - $ref: "#/components/schemas/media_models__Binding_RelevanceOrderByInput"
+            - items:
+                anyOf:
+                  - $ref: "#/components/schemas/media_models__Binding_id_OrderByInput"
+                  - $ref: "#/components/schemas/media_models__Binding_playlistId_OrderByInput"
+                  - $ref: "#/components/schemas/media_models__Binding_mediaId_OrderByInput"
+                  - $ref: "#/components/schemas/media_models__Binding_rank_OrderByInput"
+                  - $ref: "#/components/schemas/media_models__Binding_RelevanceOrderByInput"
+              type: array
+          title: Orderby
+        where:
+          $ref: "#/components/schemas/media_models_BindingWhereInput"
+        cursor:
+          anyOf:
+            - $ref: "#/components/schemas/media_models__BindingWhereUnique_id_Input"
+            - $ref: "#/components/schemas/media_models__BindingCompoundplaylistId_rankKey"
+          title: Cursor
+        distinct:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Distinct
+        include:
+          $ref: "#/components/schemas/media_models_BindingIncludeFromBinding"
+      type: object
+      title: FindManyBindingArgsFromMedia
+      description: Arguments for Media
+    media_models_FindManyBindingArgsFromPlaylist:
+      properties:
+        take:
+          type: integer
+          title: Take
+        skip:
+          type: integer
+          title: Skip
+        orderBy:
+          anyOf:
+            - $ref: "#/components/schemas/media_models__Binding_id_OrderByInput"
+            - $ref: "#/components/schemas/media_models__Binding_playlistId_OrderByInput"
+            - $ref: "#/components/schemas/media_models__Binding_mediaId_OrderByInput"
+            - $ref: "#/components/schemas/media_models__Binding_rank_OrderByInput"
+            - $ref: "#/components/schemas/media_models__Binding_RelevanceOrderByInput"
+            - items:
+                anyOf:
+                  - $ref: "#/components/schemas/media_models__Binding_id_OrderByInput"
+                  - $ref: "#/components/schemas/media_models__Binding_playlistId_OrderByInput"
+                  - $ref: "#/components/schemas/media_models__Binding_mediaId_OrderByInput"
+                  - $ref: "#/components/schemas/media_models__Binding_rank_OrderByInput"
+                  - $ref: "#/components/schemas/media_models__Binding_RelevanceOrderByInput"
+              type: array
+          title: Orderby
+        where:
+          $ref: "#/components/schemas/media_models_BindingWhereInput"
+        cursor:
+          anyOf:
+            - $ref: "#/components/schemas/media_models__BindingWhereUnique_id_Input"
+            - $ref: "#/components/schemas/media_models__BindingCompoundplaylistId_rankKey"
+          title: Cursor
+        distinct:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Distinct
+        include:
+          $ref: "#/components/schemas/media_models_BindingIncludeFromBinding"
+      type: object
+      title: FindManyBindingArgsFromPlaylist
+      description: Arguments for Playlist
+    media_models_GetRequestId:
+      type: string
+      format: uuid
+    media_models_GetRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/MediaInclude"
+        - type: "null"
+    media_models_ListRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/MediaInclude"
+        - type: "null"
+    media_models_ListRequestLimit:
+      anyOf:
+        - type: integer
+        - type: "null"
+    media_models_ListRequestOffset:
+      anyOf:
+        - type: integer
+        - type: "null"
+    media_models_ListRequestOrder:
+      anyOf:
+        - $ref: "#/components/schemas/MediaOrderByInput"
+        - items:
+            $ref: "#/components/schemas/MediaOrderByInput"
+          type: array
+        - type: "null"
+    media_models_ListRequestWhere:
+      anyOf:
+        - $ref: "#/components/schemas/media_models_MediaWhereInput"
+        - type: "null"
+    media_models_ListResponseResults:
+      properties:
+        count:
+          type: integer
+          title: Count
+          description: Total number of media that matched the query.
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          description: Maximum number of returned media.
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          description: Number of media skipped.
+        media:
+          items:
+            $ref: "#/components/schemas/media_models_Media"
+          type: array
+          title: Media
+          description: Media that matched the request.
+      type: object
+      required:
+        - count
+        - limit
+        - offset
+        - media
+      title: MediaList
+      description: List of media.
     media_models_Media:
       properties:
         id:
           type: string
           format: uuid
+          title: Id
           description: Identifier of the media.
         name:
           type: string
+          title: Name
           description: Name of the media.
         bindings:
-          oneOf:
+          anyOf:
             - items:
                 $ref: "#/components/schemas/media_models_Binding"
               type: array
             - type: "null"
+          title: Bindings
           description: Bindings that the media belongs to.
       type: object
       required:
         - id
         - name
+        - bindings
       title: Media
-    playlists_models_Binding:
+      description: Media data.
+    media_models_MediaArgsFromBinding:
       properties:
-        id:
-          type: string
-          format: uuid
-          description: Identifier of the binding.
-        playlistId:
-          type: string
-          format: uuid
-          description: Identifier of the playlist that the binding belongs to.
-        mediaId:
-          type: string
-          format: uuid
-          description: Identifier of the media that the binding belongs to.
-        rank:
-          type: string
-          description: Rank of the media in the binding.
-        playlist:
-          description: Playlist that the binding belongs to.
-        media:
-          description: Media that the binding belongs to.
+        include:
+          $ref: "#/components/schemas/media_models_MediaIncludeFromMedia"
       type: object
-      required:
-        - id
-        - media
-        - mediaId
-        - playlist
-        - playlistId
-        - rank
-      title: Binding
-    playlists_models_Playlist:
+      title: MediaArgsFromBinding
+      description: Arguments for Binding
+    media_models_MediaIncludeFromMedia:
+      properties:
+        bindings:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/media_models_FindManyBindingArgsFromMedia"
+          title: Bindings
+      type: object
+      title: MediaIncludeFromMedia
+      description: Relational arguments for Media
+    media_models_MediaRelationFilter:
+      properties:
+        is:
+          $ref: "#/components/schemas/media_models_MediaWhereInput"
+        isNot:
+          $ref: "#/components/schemas/media_models_MediaWhereInput"
+      type: object
+      title: MediaRelationFilter
+    media_models_MediaWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Id
+        name:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Name
+        bindings:
+          $ref: "#/components/schemas/media_models_BindingListRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/media_models_MediaWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/media_models_MediaWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/media_models_MediaWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: MediaWhereInput
+      description: Media arguments for searching
+    media_models_Playlist:
       properties:
         id:
           type: string
           format: uuid
+          title: Id
           description: Identifier of the playlist.
         name:
           type: string
+          title: Name
           description: Name of the playlist.
         bindings:
-          oneOf:
+          anyOf:
             - items:
-                $ref: "#/components/schemas/playlists_models_Binding"
+                $ref: "#/components/schemas/media_models_Binding"
               type: array
             - type: "null"
+          title: Bindings
           description: Bindings that the playlist belongs to.
       type: object
       required:
         - id
         - name
+        - bindings
       title: Playlist
+      description: Playlist data.
+    media_models_PlaylistArgsFromBinding:
+      properties:
+        include:
+          $ref: "#/components/schemas/media_models_PlaylistIncludeFromPlaylist"
+      type: object
+      title: PlaylistArgsFromBinding
+      description: Arguments for Binding
+    media_models_PlaylistIncludeFromPlaylist:
+      properties:
+        bindings:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/media_models_FindManyBindingArgsFromPlaylist"
+          title: Bindings
+      type: object
+      title: PlaylistIncludeFromPlaylist
+      description: Relational arguments for Playlist
+    media_models_PlaylistRelationFilter:
+      properties:
+        is:
+          $ref: "#/components/schemas/media_models_PlaylistWhereInput"
+        isNot:
+          $ref: "#/components/schemas/media_models_PlaylistWhereInput"
+      type: object
+      title: PlaylistRelationFilter
+    media_models_PlaylistWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Id
+        name:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Name
+        bindings:
+          $ref: "#/components/schemas/media_models_BindingListRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/media_models_PlaylistWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/media_models_PlaylistWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/media_models_PlaylistWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: PlaylistWhereInput
+      description: Playlist arguments for searching
+    media_models_StringFilter:
+      properties:
+        equals:
+          type: string
+          title: Equals
+        notIn:
+          items:
+            type: string
+          type: array
+          title: Notin
+        lt:
+          type: string
+          title: Lt
+        lte:
+          type: string
+          title: Lte
+        gt:
+          type: string
+          title: Gt
+        gte:
+          type: string
+          title: Gte
+        contains:
+          type: string
+          title: Contains
+        startswith:
+          type: string
+          title: Startswith
+        endswith:
+          type: string
+          title: Endswith
+        in:
+          items:
+            type: string
+          type: array
+          title: In
+        not:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/media_models_StringFilter"
+          title: Not
+        mode:
+          type: string
+          enum:
+            - default
+            - insensitive
+          title: Mode
+        search:
+          type: string
+          title: Search
+      type: object
+      title: StringFilter
+    media_models_UpdateRequestData:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+      type: object
+      title: MediaUpdateManyMutationInput
+      description: Arguments for updating many records
+    media_models_UpdateRequestId:
+      type: string
+      format: uuid
+    media_models_UpdateRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/MediaInclude"
+        - type: "null"
+    media_models__BindingCompoundplaylistId_rankKey:
+      properties:
+        playlistidRank:
+          $ref: "#/components/schemas/media_models__BindingCompoundplaylistId_rankKeyInner"
+      type: object
+      required:
+        - playlistidRank
+      title: _BindingCompoundplaylistId_rankKey
+    media_models__BindingCompoundplaylistId_rankKeyInner:
+      properties:
+        playlistId:
+          type: string
+          title: Playlistid
+        rank:
+          type: string
+          title: Rank
+      type: object
+      required:
+        - playlistId
+        - rank
+      title: _BindingCompoundplaylistId_rankKeyInner
+    media_models__BindingWhereUnique_id_Input:
+      properties:
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+        - id
+      title: _BindingWhereUnique_id_Input
+    media_models__Binding_RelevanceInner:
+      properties:
+        fields:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Fields
+        search:
+          type: string
+          title: Search
+        sort:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Sort
+      type: object
+      required:
+        - fields
+        - search
+        - sort
+      title: _Binding_RelevanceInner
+    media_models__Binding_RelevanceOrderByInput:
+      properties:
+        _relevance:
+          $ref: "#/components/schemas/media_models__Binding_RelevanceInner"
+      type: object
+      required:
+        - _relevance
+      title: _Binding_RelevanceOrderByInput
+    media_models__Binding_id_OrderByInput:
+      properties:
+        id:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Id
+      type: object
+      required:
+        - id
+      title: _Binding_id_OrderByInput
+    media_models__Binding_mediaId_OrderByInput:
+      properties:
+        mediaId:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Mediaid
+      type: object
+      required:
+        - mediaId
+      title: _Binding_mediaId_OrderByInput
+    media_models__Binding_playlistId_OrderByInput:
+      properties:
+        playlistId:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Playlistid
+      type: object
+      required:
+        - playlistId
+      title: _Binding_playlistId_OrderByInput
+    media_models__Binding_rank_OrderByInput:
+      properties:
+        rank:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Rank
+      type: object
+      required:
+        - rank
+      title: _Binding_rank_OrderByInput
+    playlists_models_Binding:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Identifier of the binding.
+        playlistId:
+          type: string
+          format: uuid
+          title: Playlistid
+          description: Identifier of the playlist that the binding belongs to.
+        mediaId:
+          type: string
+          format: uuid
+          title: Mediaid
+          description: Identifier of the media that the binding belongs to.
+        rank:
+          type: string
+          title: Rank
+          description: Rank of the media in the binding.
+        playlist:
+          anyOf:
+            - $ref: "#/components/schemas/playlists_models_Playlist"
+            - type: "null"
+          description: Playlist that the binding belongs to.
+        media:
+          anyOf:
+            - $ref: "#/components/schemas/playlists_models_Media"
+            - type: "null"
+          description: Media that the binding belongs to.
+      type: object
+      required:
+        - id
+        - playlistId
+        - mediaId
+        - rank
+        - playlist
+        - media
+      title: Binding
+      description: Binding data.
+    playlists_models_BindingIncludeFromBinding:
+      properties:
+        playlist:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/playlists_models_PlaylistArgsFromBinding"
+          title: Playlist
+        media:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/playlists_models_MediaArgsFromBinding"
+          title: Media
+      type: object
+      title: BindingIncludeFromBinding
+      description: Relational arguments for Binding
+    playlists_models_BindingListRelationFilter:
+      properties:
+        some:
+          $ref: "#/components/schemas/playlists_models_BindingWhereInput"
+        none:
+          $ref: "#/components/schemas/playlists_models_BindingWhereInput"
+        every:
+          $ref: "#/components/schemas/playlists_models_BindingWhereInput"
+      type: object
+      title: BindingListRelationFilter
+    playlists_models_BindingWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Id
+        playlistId:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Playlistid
+        mediaId:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Mediaid
+        rank:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Rank
+        playlist:
+          $ref: "#/components/schemas/playlists_models_PlaylistRelationFilter"
+        media:
+          $ref: "#/components/schemas/playlists_models_MediaRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/playlists_models_BindingWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/playlists_models_BindingWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/playlists_models_BindingWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: BindingWhereInput
+      description: Binding arguments for searching
+    playlists_models_CreateRequestData:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+        - name
+      title: PlaylistCreateWithoutRelationsInput
+      description: >-
+        Required arguments to the Playlist create method, without relations
+    playlists_models_CreateRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/PlaylistInclude"
+        - type: "null"
+    playlists_models_DeleteRequestId:
+      type: string
+      format: uuid
+    playlists_models_FindManyBindingArgsFromMedia:
+      properties:
+        take:
+          type: integer
+          title: Take
+        skip:
+          type: integer
+          title: Skip
+        orderBy:
+          anyOf:
+            - $ref: "#/components/schemas/playlists_models__Binding_id_OrderByInput"
+            - $ref: "#/components/schemas/playlists_models__Binding_playlistId_OrderByInput"
+            - $ref: "#/components/schemas/playlists_models__Binding_mediaId_OrderByInput"
+            - $ref: "#/components/schemas/playlists_models__Binding_rank_OrderByInput"
+            - $ref: "#/components/schemas/playlists_models__Binding_RelevanceOrderByInput"
+            - items:
+                anyOf:
+                  - $ref: "#/components/schemas/playlists_models__Binding_id_OrderByInput"
+                  - $ref: "#/components/schemas/playlists_models__Binding_playlistId_OrderByInput"
+                  - $ref: "#/components/schemas/playlists_models__Binding_mediaId_OrderByInput"
+                  - $ref: "#/components/schemas/playlists_models__Binding_rank_OrderByInput"
+                  - $ref: "#/components/schemas/playlists_models__Binding_RelevanceOrderByInput"
+              type: array
+          title: Orderby
+        where:
+          $ref: "#/components/schemas/playlists_models_BindingWhereInput"
+        cursor:
+          anyOf:
+            - $ref: "#/components/schemas/playlists_models__BindingWhereUnique_id_Input"
+            - $ref: "#/components/schemas/playlists_models__BindingCompoundplaylistId_rankKey"
+          title: Cursor
+        distinct:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Distinct
+        include:
+          $ref: "#/components/schemas/playlists_models_BindingIncludeFromBinding"
+      type: object
+      title: FindManyBindingArgsFromMedia
+      description: Arguments for Media
+    playlists_models_FindManyBindingArgsFromPlaylist:
+      properties:
+        take:
+          type: integer
+          title: Take
+        skip:
+          type: integer
+          title: Skip
+        orderBy:
+          anyOf:
+            - $ref: "#/components/schemas/playlists_models__Binding_id_OrderByInput"
+            - $ref: "#/components/schemas/playlists_models__Binding_playlistId_OrderByInput"
+            - $ref: "#/components/schemas/playlists_models__Binding_mediaId_OrderByInput"
+            - $ref: "#/components/schemas/playlists_models__Binding_rank_OrderByInput"
+            - $ref: "#/components/schemas/playlists_models__Binding_RelevanceOrderByInput"
+            - items:
+                anyOf:
+                  - $ref: "#/components/schemas/playlists_models__Binding_id_OrderByInput"
+                  - $ref: "#/components/schemas/playlists_models__Binding_playlistId_OrderByInput"
+                  - $ref: "#/components/schemas/playlists_models__Binding_mediaId_OrderByInput"
+                  - $ref: "#/components/schemas/playlists_models__Binding_rank_OrderByInput"
+                  - $ref: "#/components/schemas/playlists_models__Binding_RelevanceOrderByInput"
+              type: array
+          title: Orderby
+        where:
+          $ref: "#/components/schemas/playlists_models_BindingWhereInput"
+        cursor:
+          anyOf:
+            - $ref: "#/components/schemas/playlists_models__BindingWhereUnique_id_Input"
+            - $ref: "#/components/schemas/playlists_models__BindingCompoundplaylistId_rankKey"
+          title: Cursor
+        distinct:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Distinct
+        include:
+          $ref: "#/components/schemas/playlists_models_BindingIncludeFromBinding"
+      type: object
+      title: FindManyBindingArgsFromPlaylist
+      description: Arguments for Playlist
+    playlists_models_GetRequestId:
+      type: string
+      format: uuid
+    playlists_models_GetRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/PlaylistInclude"
+        - type: "null"
+    playlists_models_ListRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/PlaylistInclude"
+        - type: "null"
+    playlists_models_ListRequestLimit:
+      anyOf:
+        - type: integer
+        - type: "null"
+    playlists_models_ListRequestOffset:
+      anyOf:
+        - type: integer
+        - type: "null"
+    playlists_models_ListRequestOrder:
+      anyOf:
+        - $ref: "#/components/schemas/PlaylistOrderByInput"
+        - items:
+            $ref: "#/components/schemas/PlaylistOrderByInput"
+          type: array
+        - type: "null"
+    playlists_models_ListRequestWhere:
+      anyOf:
+        - $ref: "#/components/schemas/playlists_models_PlaylistWhereInput"
+        - type: "null"
+    playlists_models_ListResponseResults:
+      properties:
+        count:
+          type: integer
+          title: Count
+          description: Total number of playlists that matched the query.
+        limit:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Limit
+          description: Maximum number of returned playlists.
+        offset:
+          anyOf:
+            - type: integer
+            - type: "null"
+          title: Offset
+          description: Number of playlists skipped.
+        playlists:
+          items:
+            $ref: "#/components/schemas/playlists_models_Playlist"
+          type: array
+          title: Playlists
+          description: Playlists that matched the request.
+      type: object
+      required:
+        - count
+        - limit
+        - offset
+        - playlists
+      title: PlaylistList
+      description: List of playlists.
+    playlists_models_Media:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Identifier of the media.
+        name:
+          type: string
+          title: Name
+          description: Name of the media.
+        bindings:
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/playlists_models_Binding"
+              type: array
+            - type: "null"
+          title: Bindings
+          description: Bindings that the media belongs to.
+      type: object
+      required:
+        - id
+        - name
+        - bindings
+      title: Media
+      description: Media data.
+    playlists_models_MediaArgsFromBinding:
+      properties:
+        include:
+          $ref: "#/components/schemas/playlists_models_MediaIncludeFromMedia"
+      type: object
+      title: MediaArgsFromBinding
+      description: Arguments for Binding
+    playlists_models_MediaIncludeFromMedia:
+      properties:
+        bindings:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/playlists_models_FindManyBindingArgsFromMedia"
+          title: Bindings
+      type: object
+      title: MediaIncludeFromMedia
+      description: Relational arguments for Media
+    playlists_models_MediaRelationFilter:
+      properties:
+        is:
+          $ref: "#/components/schemas/playlists_models_MediaWhereInput"
+        isNot:
+          $ref: "#/components/schemas/playlists_models_MediaWhereInput"
+      type: object
+      title: MediaRelationFilter
+    playlists_models_MediaWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Id
+        name:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Name
+        bindings:
+          $ref: "#/components/schemas/playlists_models_BindingListRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/playlists_models_MediaWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/playlists_models_MediaWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/playlists_models_MediaWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: MediaWhereInput
+      description: Media arguments for searching
+    playlists_models_Playlist:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: Identifier of the playlist.
+        name:
+          type: string
+          title: Name
+          description: Name of the playlist.
+        bindings:
+          anyOf:
+            - items:
+                $ref: "#/components/schemas/playlists_models_Binding"
+              type: array
+            - type: "null"
+          title: Bindings
+          description: Bindings that the playlist belongs to.
+      type: object
+      required:
+        - id
+        - name
+        - bindings
+      title: Playlist
+      description: Playlist data.
+    playlists_models_PlaylistArgsFromBinding:
+      properties:
+        include:
+          $ref: "#/components/schemas/playlists_models_PlaylistIncludeFromPlaylist"
+      type: object
+      title: PlaylistArgsFromBinding
+      description: Arguments for Binding
+    playlists_models_PlaylistIncludeFromPlaylist:
+      properties:
+        bindings:
+          anyOf:
+            - type: boolean
+            - $ref: "#/components/schemas/playlists_models_FindManyBindingArgsFromPlaylist"
+          title: Bindings
+      type: object
+      title: PlaylistIncludeFromPlaylist
+      description: Relational arguments for Playlist
+    playlists_models_PlaylistRelationFilter:
+      properties:
+        is:
+          $ref: "#/components/schemas/playlists_models_PlaylistWhereInput"
+        isNot:
+          $ref: "#/components/schemas/playlists_models_PlaylistWhereInput"
+      type: object
+      title: PlaylistRelationFilter
+    playlists_models_PlaylistWhereInput:
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Id
+        name:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Name
+        bindings:
+          $ref: "#/components/schemas/playlists_models_BindingListRelationFilter"
+        and:
+          items:
+            $ref: "#/components/schemas/playlists_models_PlaylistWhereInput"
+          type: array
+          title: And
+        or:
+          items:
+            $ref: "#/components/schemas/playlists_models_PlaylistWhereInput"
+          type: array
+          title: Or
+        not:
+          items:
+            $ref: "#/components/schemas/playlists_models_PlaylistWhereInput"
+          type: array
+          title: Not
+      type: object
+      title: PlaylistWhereInput
+      description: Playlist arguments for searching
+    playlists_models_StringFilter:
+      properties:
+        equals:
+          type: string
+          title: Equals
+        notIn:
+          items:
+            type: string
+          type: array
+          title: Notin
+        lt:
+          type: string
+          title: Lt
+        lte:
+          type: string
+          title: Lte
+        gt:
+          type: string
+          title: Gt
+        gte:
+          type: string
+          title: Gte
+        contains:
+          type: string
+          title: Contains
+        startswith:
+          type: string
+          title: Startswith
+        endswith:
+          type: string
+          title: Endswith
+        in:
+          items:
+            type: string
+          type: array
+          title: In
+        not:
+          anyOf:
+            - type: string
+            - $ref: "#/components/schemas/playlists_models_StringFilter"
+          title: Not
+        mode:
+          type: string
+          enum:
+            - default
+            - insensitive
+          title: Mode
+        search:
+          type: string
+          title: Search
+      type: object
+      title: StringFilter
+    playlists_models_UpdateRequestData:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+      type: object
+      title: PlaylistUpdateManyMutationInput
+      description: Arguments for updating many records
+    playlists_models_UpdateRequestId:
+      type: string
+      format: uuid
+    playlists_models_UpdateRequestInclude:
+      anyOf:
+        - $ref: "#/components/schemas/PlaylistInclude"
+        - type: "null"
+    playlists_models__BindingCompoundplaylistId_rankKey:
+      properties:
+        playlistidRank:
+          $ref: "#/components/schemas/playlists_models__BindingCompoundplaylistId_rankKeyInner"
+      type: object
+      required:
+        - playlistidRank
+      title: _BindingCompoundplaylistId_rankKey
+    playlists_models__BindingCompoundplaylistId_rankKeyInner:
+      properties:
+        playlistId:
+          type: string
+          title: Playlistid
+        rank:
+          type: string
+          title: Rank
+      type: object
+      required:
+        - playlistId
+        - rank
+      title: _BindingCompoundplaylistId_rankKeyInner
+    playlists_models__BindingWhereUnique_id_Input:
+      properties:
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+        - id
+      title: _BindingWhereUnique_id_Input
+    playlists_models__Binding_RelevanceInner:
+      properties:
+        fields:
+          items:
+            type: string
+            enum:
+              - id
+              - playlistId
+              - mediaId
+              - rank
+          type: array
+          title: Fields
+        search:
+          type: string
+          title: Search
+        sort:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Sort
+      type: object
+      required:
+        - fields
+        - search
+        - sort
+      title: _Binding_RelevanceInner
+    playlists_models__Binding_RelevanceOrderByInput:
+      properties:
+        _relevance:
+          $ref: "#/components/schemas/playlists_models__Binding_RelevanceInner"
+      type: object
+      required:
+        - _relevance
+      title: _Binding_RelevanceOrderByInput
+    playlists_models__Binding_id_OrderByInput:
+      properties:
+        id:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Id
+      type: object
+      required:
+        - id
+      title: _Binding_id_OrderByInput
+    playlists_models__Binding_mediaId_OrderByInput:
+      properties:
+        mediaId:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Mediaid
+      type: object
+      required:
+        - mediaId
+      title: _Binding_mediaId_OrderByInput
+    playlists_models__Binding_playlistId_OrderByInput:
+      properties:
+        playlistId:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Playlistid
+      type: object
+      required:
+        - playlistId
+      title: _Binding_playlistId_OrderByInput
+    playlists_models__Binding_rank_OrderByInput:
+      properties:
+        rank:
+          type: string
+          enum:
+            - asc
+            - desc
+          title: Rank
+      type: object
+      required:
+        - rank
+      title: _Binding_rank_OrderByInput

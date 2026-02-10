@@ -45,6 +45,8 @@ import {
   PlaylistsListResponseSchema,
   SseSubscribeRequestSchema,
   SseSubscribeResponseSchema,
+  TestTestRequestSchema,
+  TestTestResponseSchema,
 } from "./schemas";
 import type {
   BindingsCreateErrors,
@@ -113,6 +115,9 @@ import type {
   PlaylistsListResponses,
   SseSubscribeRequest,
   SseSubscribeResponses,
+  TestTestErrors,
+  TestTestRequest,
+  TestTestResponses,
 } from "./types";
 
 export type Options<
@@ -688,6 +693,28 @@ export class Sdk extends HeyApiClient {
       responseValidator: async (data) =>
         await SseSubscribeResponseSchema.parseAsync(data),
       url: "/sse",
+      ...options,
+    });
+  }
+
+  /**
+   * Test
+   *
+   * Test.
+   */
+  public testTest<ThrowOnError extends boolean = false>(
+    options?: Options<TestTestRequest, ThrowOnError>,
+  ) {
+    return (options?.client ?? this.client).get<
+      TestTestResponses,
+      TestTestErrors,
+      ThrowOnError
+    >({
+      requestValidator: async (data) =>
+        await TestTestRequestSchema.parseAsync(data),
+      responseValidator: async (data) =>
+        await TestTestResponseSchema.parseAsync(data),
+      url: "/test",
       ...options,
     });
   }

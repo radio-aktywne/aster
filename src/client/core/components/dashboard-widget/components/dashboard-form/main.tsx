@@ -16,9 +16,9 @@ export function DashboardForm({
 }: DashboardFormInput) {
   const { localization } = useLocalization();
 
-  const { data: listPlaylistsData } = useSuspenseQuery(
+  const listPlaylistsQuery = useSuspenseQuery(
     orpcClientSideQueryClient.core.listPlaylists.queryOptions({
-      input: { limit: null },
+      input: { limit: "null" },
     }),
   );
 
@@ -29,10 +29,12 @@ export function DashboardForm({
     schema: Schemas.Values,
   });
 
-  const playlistSelectData = listPlaylistsData.playlists.map((playlist) => ({
-    label: playlist.name,
-    value: playlist.id,
-  }));
+  const playlistSelectData = listPlaylistsQuery.data.playlists.map(
+    (playlist) => ({
+      label: playlist.name,
+      value: playlist.id,
+    }),
+  );
 
   return (
     <form onSubmit={handleFormSubmit} style={{ display: "contents" }}>
