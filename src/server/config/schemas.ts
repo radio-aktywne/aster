@@ -10,7 +10,12 @@ export const ConfigSchemas = {
             .object({
               host: z.string().default("localhost"),
               path: z.string().nullish(),
-              port: z.coerce.number().min(0).max(65535).default(10101),
+              port: z.coerce
+                .number()
+                .min(0)
+                .max(65535)
+                .nullish()
+                .default(10101),
               scheme: z.string().default("http"),
             })
             .prefault({}),
@@ -26,7 +31,12 @@ export const ConfigSchemas = {
             .object({
               host: z.string().default("localhost"),
               path: z.string().nullish(),
-              port: z.coerce.number().min(0).max(65535).default(10200),
+              port: z.coerce
+                .number()
+                .min(0)
+                .max(65535)
+                .nullish()
+                .default(10200),
               scheme: z.string().default("http"),
             })
             .prefault({}),
