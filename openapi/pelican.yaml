@@ -1,7 +1,7 @@
 openapi: "3.1.0"
 info:
   title: pelican
-  version: "0.11.0"
+  version: "0.12.0"
 paths:
   /bindings:
     get:
@@ -265,6 +265,31 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
     delete:
       tags:
@@ -282,6 +307,7 @@ paths:
       responses:
         "204":
           description: Request fulfilled, nothing follows
+          headers: {}
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -306,6 +332,31 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
     patch:
@@ -377,6 +428,31 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
   /media:
@@ -641,6 +717,31 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
     delete:
       tags:
@@ -658,6 +759,7 @@ paths:
       responses:
         "204":
           description: Request fulfilled, nothing follows
+          headers: {}
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -682,6 +784,31 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
     patch:
@@ -754,6 +881,31 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
   /media/{id}/content:
     get:
@@ -771,10 +923,25 @@ paths:
           deprecated: false
       responses:
         "200":
-          description: Request fulfilled, stream follows
+          description: Stream Response
+          headers:
+            Last-Modified:
+              required: true
+              deprecated: false
+            Content-Length:
+              required: true
+              deprecated: false
+            ETag:
+              required: true
+              deprecated: false
+            Content-Type:
+              required: true
+              deprecated: false
           content:
             "*/*":
-              schema: {}
+              schema:
+                type: string
+                format: binary
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -799,6 +966,31 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
     put:
@@ -828,9 +1020,17 @@ paths:
           description: Content type.
           required: true
           deprecated: false
+      requestBody:
+        content:
+          "*/*":
+            schema:
+              type: string
+              format: binary
+        required: true
       responses:
         "204":
           description: Request fulfilled, nothing follows
+          headers: {}
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -855,6 +1055,31 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
     head:
@@ -872,7 +1097,20 @@ paths:
           deprecated: false
       responses:
         "200":
-          description: Request fulfilled, nothing follows
+          description: Request fulfilled, headers follow
+          headers:
+            Last-Modified:
+              required: true
+              deprecated: false
+            Content-Length:
+              required: true
+              deprecated: false
+            ETag:
+              required: true
+              deprecated: false
+            Content-Type:
+              required: true
+              deprecated: false
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -898,6 +1136,31 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
   /ping:
     get:
@@ -908,7 +1171,13 @@ paths:
       operationId: PingPing
       responses:
         "204":
-          description: Successful ping.
+          description: Request fulfilled, nothing follows
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              required: true
+              deprecated: false
       deprecated: false
     head:
       tags:
@@ -918,7 +1187,13 @@ paths:
       operationId: PingHeadping
       responses:
         "204":
-          description: Successful ping.
+          description: Request fulfilled, nothing follows
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              required: true
+              deprecated: false
       deprecated: false
   /playlists:
     get:
@@ -1182,6 +1457,31 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
     delete:
       tags:
@@ -1199,6 +1499,7 @@ paths:
       responses:
         "204":
           description: Request fulfilled, nothing follows
+          headers: {}
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -1223,6 +1524,31 @@ paths:
                 examples:
                   - status_code: 400
                     detail: Bad Request
+                    extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
                     extra: {}
       deprecated: false
     patch:
@@ -1295,6 +1621,31 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
   /playlists/{id}/m3u:
     get:
@@ -1317,8 +1668,7 @@ paths:
             Content-Type:
               schema:
                 type: string
-              description: Content type.
-              required: false
+              required: true
               deprecated: false
           content:
             audio/mpegurl:
@@ -1349,6 +1699,31 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
     head:
       tags:
@@ -1365,7 +1740,13 @@ paths:
           deprecated: false
       responses:
         "200":
-          description: Request fulfilled, nothing follows
+          description: Request fulfilled, headers follow
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              required: true
+              deprecated: false
         "400":
           description: Bad request syntax or unsupported method
           content:
@@ -1391,6 +1772,31 @@ paths:
                   - status_code: 400
                     detail: Bad Request
                     extra: {}
+        "404":
+          description: Nothing matches the given URI
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Not Found Exception
+                examples:
+                  - status_code: 404
+                    detail: Not Found
+                    extra: {}
       deprecated: false
   /sse:
     get:
@@ -1399,13 +1805,68 @@ paths:
       summary: Get SSE stream
       description: Get a stream of Server-Sent Events.
       operationId: SseSubscribe
+      parameters:
+        - name: types
+          in: query
+          schema:
+            oneOf:
+              - anyOf:
+                  - $ref: "#/components/schemas/SubscribeRequestTypes"
+                  - type: string
+                    contentMediaType: application/json
+                    contentSchema:
+                      $ref: "#/components/schemas/SubscribeRequestTypes"
+                title: SubscribeRequestTypes
+              - type: "null"
+            description: Types of events to subscribe to.
+          description: Types of events to subscribe to.
+          required: false
+          deprecated: false
+          allowEmptyValue: false
+          allowReserved: false
       responses:
         "200":
-          description: Stream of Server-Sent Events.
+          description: Request fulfilled, stream of Server-Sent Events follows
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              required: true
+              deprecated: false
+            Connection:
+              schema:
+                type: string
+              required: true
+              deprecated: false
           content:
             text/event-stream:
               schema:
                 type: string
+        "400":
+          description: Bad request syntax or unsupported method
+          content:
+            application/json:
+              schema:
+                properties:
+                  status_code:
+                    type: integer
+                  detail:
+                    type: string
+                  extra:
+                    additionalProperties: {}
+                    type:
+                      - "null"
+                      - object
+                      - array
+                type: object
+                required:
+                  - detail
+                  - status_code
+                description: Validation Exception
+                examples:
+                  - status_code: 400
+                    detail: Bad Request
+                    extra: {}
       deprecated: false
   /test:
     get:
@@ -1499,6 +1960,21 @@ components:
     DownloadRequestId:
       type: string
       format: uuid
+    EventType:
+      type: string
+      enum:
+        - test
+        - binding-created
+        - binding-updated
+        - binding-deleted
+        - media-created
+        - media-updated
+        - media-deleted
+        - playlist-created
+        - playlist-updated
+        - playlist-deleted
+      title: EventType
+      description: Event types.
     GetResponseBinding:
       properties:
         id:
@@ -1638,6 +2114,14 @@ components:
       anyOf:
         - $ref: "#/components/schemas/_Playlist_id_OrderByInput"
         - $ref: "#/components/schemas/_Playlist_name_OrderByInput"
+    SubscribeRequestTypes:
+      anyOf:
+        - type: string
+        - items:
+            $ref: "#/components/schemas/EventType"
+          type: array
+          uniqueItems: true
+        - type: "null"
     TestRequestParameters:
       anyOf:
         - $ref: "#/components/schemas/Parameters"

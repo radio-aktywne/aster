@@ -15,6 +15,7 @@ import {
   MediaCreateRequestSchema,
   MediaCreateResponseSchema,
   MediaIdContentDownloadRequestSchema,
+  MediaIdContentDownloadResponseSchema,
   MediaIdContentHeaddownloadRequestSchema,
   MediaIdContentUploadRequestSchema,
   MediaIdContentUploadResponseSchema,
@@ -113,6 +114,7 @@ import type {
   PlaylistsListErrors,
   PlaylistsListRequest,
   PlaylistsListResponses,
+  SseSubscribeErrors,
   SseSubscribeRequest,
   SseSubscribeResponses,
   TestTestErrors,
@@ -424,6 +426,8 @@ export class Sdk extends HeyApiClient {
     >({
       requestValidator: async (data) =>
         await MediaIdContentDownloadRequestSchema.parseAsync(data),
+      responseValidator: async (data) =>
+        await MediaIdContentDownloadResponseSchema.parseAsync(data),
       url: "/media/{id}/content",
       ...options,
     });
@@ -462,6 +466,7 @@ export class Sdk extends HeyApiClient {
       MediaIdContentUploadErrors,
       ThrowOnError
     >({
+      bodySerializer: null,
       requestValidator: async (data) =>
         await MediaIdContentUploadRequestSchema.parseAsync(data),
       responseValidator: async (data) =>
@@ -685,7 +690,7 @@ export class Sdk extends HeyApiClient {
   ) {
     return (options?.client ?? this.client).sse.get<
       SseSubscribeResponses,
-      unknown,
+      SseSubscribeErrors,
       ThrowOnError
     >({
       requestValidator: async (data) =>
