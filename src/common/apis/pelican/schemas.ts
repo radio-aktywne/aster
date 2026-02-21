@@ -504,6 +504,34 @@ export const TestRequestParametersSchema = z.union([
   z.null(),
 ]);
 
+/**
+ * EventType
+ *
+ * Event types.
+ */
+export const EventTypeSchema = z
+  .enum([
+    "test",
+    "binding-created",
+    "binding-updated",
+    "binding-deleted",
+    "media-created",
+    "media-updated",
+    "media-deleted",
+    "playlist-created",
+    "playlist-updated",
+    "playlist-deleted",
+  ])
+  .register(z.globalRegistry, {
+    description: "Event types.",
+  });
+
+export const SubscribeRequestTypesSchema = z.union([
+  z.string(),
+  z.array(EventTypeSchema),
+  z.null(),
+]);
+
 export const M3uRequestIdSchema = z.uuid();
 
 export const HeadM3uRequestIdSchema = z.uuid();
@@ -1944,6 +1972,15 @@ export const MediaIdContentDownloadRequestSchema = z.object({
   query: z.optional(z.never()),
 });
 
+/**
+ * Stream Response
+ */
+export const MediaIdContentDownloadResponseSchema = z
+  .string()
+  .register(z.globalRegistry, {
+    description: "Stream Response",
+  });
+
 export const MediaIdContentHeaddownloadRequestSchema = z.object({
   body: z.optional(z.never()),
   path: z.object({
@@ -1953,7 +1990,7 @@ export const MediaIdContentHeaddownloadRequestSchema = z.object({
 });
 
 export const MediaIdContentUploadRequestSchema = z.object({
-  body: z.optional(z.never()),
+  body: z.string(),
   path: z.object({
     id: UploadRequestIdSchema,
   }),
@@ -1979,10 +2016,10 @@ export const PingPingRequestSchema = z.object({
 });
 
 /**
- * Successful ping.
+ * Request fulfilled, nothing follows
  */
 export const PingPingResponseSchema = z.void().register(z.globalRegistry, {
-  description: "Successful ping.",
+  description: "Request fulfilled, nothing follows",
 });
 
 export const PingHeadpingRequestSchema = z.object({
@@ -1992,10 +2029,10 @@ export const PingHeadpingRequestSchema = z.object({
 });
 
 /**
- * Successful ping.
+ * Request fulfilled, nothing follows
  */
 export const PingHeadpingResponseSchema = z.void().register(z.globalRegistry, {
-  description: "Successful ping.",
+  description: "Request fulfilled, nothing follows",
 });
 
 export const PlaylistsIdDeleteRequestSchema = z.object({
@@ -2043,16 +2080,22 @@ export const PlaylistsIdM3uHeadm3uRequestSchema = z.object({
 export const SseSubscribeRequestSchema = z.object({
   body: z.optional(z.never()),
   path: z.optional(z.never()),
-  query: z.optional(z.never()),
+  query: z.optional(
+    z.object({
+      types: z.optional(
+        z.union([SubscribeRequestTypesSchema, z.string(), z.null()]),
+      ),
+    }),
+  ),
 });
 
 /**
- * Stream of Server-Sent Events.
+ * Request fulfilled, stream of Server-Sent Events follows
  */
 export const SseSubscribeResponseSchema = z
   .string()
   .register(z.globalRegistry, {
-    description: "Stream of Server-Sent Events.",
+    description: "Request fulfilled, stream of Server-Sent Events follows",
   });
 
 export const TestTestRequestSchema = z.object({

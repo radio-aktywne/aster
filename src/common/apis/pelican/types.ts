@@ -1958,6 +1958,25 @@ export type Parameters = {
   message?: string | null;
 };
 
+export type SubscribeRequestTypes = string | Array<EventType> | null;
+
+/**
+ * EventType
+ *
+ * Event types.
+ */
+export type EventType =
+  | "test"
+  | "binding-created"
+  | "binding-updated"
+  | "binding-deleted"
+  | "media-created"
+  | "media-updated"
+  | "media-deleted"
+  | "playlist-created"
+  | "playlist-updated"
+  | "playlist-deleted";
+
 export type M3uRequestId = string;
 
 export type HeadM3uRequestId = string;
@@ -2176,6 +2195,19 @@ export type BindingsIdDeleteErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type BindingsIdDeleteError =
@@ -2219,6 +2251,19 @@ export type BindingsIdGetErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type BindingsIdGetError = BindingsIdGetErrors[keyof BindingsIdGetErrors];
@@ -2252,6 +2297,19 @@ export type BindingsIdUpdateErrors = {
    * Validation Exception
    */
   400: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
+  /**
+   * Not Found Exception
+   */
+  404: {
     status_code: number;
     detail: string;
     extra?:
@@ -2394,6 +2452,19 @@ export type MediaIdDeleteErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type MediaIdDeleteError = MediaIdDeleteErrors[keyof MediaIdDeleteErrors];
@@ -2427,6 +2498,19 @@ export type MediaIdGetErrors = {
    * Validation Exception
    */
   400: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
+  /**
+   * Not Found Exception
+   */
+  404: {
     status_code: number;
     detail: string;
     extra?:
@@ -2477,6 +2561,19 @@ export type MediaIdUpdateErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type MediaIdUpdateError = MediaIdUpdateErrors[keyof MediaIdUpdateErrors];
@@ -2514,6 +2611,19 @@ export type MediaIdContentDownloadErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type MediaIdContentDownloadError =
@@ -2521,10 +2631,13 @@ export type MediaIdContentDownloadError =
 
 export type MediaIdContentDownloadResponses = {
   /**
-   * Request fulfilled, stream follows
+   * Stream Response
    */
-  200: unknown;
+  200: Blob | File;
 };
+
+export type MediaIdContentDownloadResponse =
+  MediaIdContentDownloadResponses[keyof MediaIdContentDownloadResponses];
 
 export type MediaIdContentHeaddownloadRequest = {
   body?: never;
@@ -2549,6 +2662,19 @@ export type MediaIdContentHeaddownloadErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type MediaIdContentHeaddownloadError =
@@ -2556,13 +2682,13 @@ export type MediaIdContentHeaddownloadError =
 
 export type MediaIdContentHeaddownloadResponses = {
   /**
-   * Request fulfilled, nothing follows
+   * Request fulfilled, headers follow
    */
   200: unknown;
 };
 
 export type MediaIdContentUploadRequest = {
-  body?: never;
+  body: Blob | File;
   headers: {
     /**
      * UploadRequestType
@@ -2583,6 +2709,19 @@ export type MediaIdContentUploadErrors = {
    * Validation Exception
    */
   400: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
+  /**
+   * Not Found Exception
+   */
+  404: {
     status_code: number;
     detail: string;
     extra?:
@@ -2616,7 +2755,7 @@ export type PingPingRequest = {
 
 export type PingPingResponses = {
   /**
-   * Successful ping.
+   * Request fulfilled, nothing follows
    */
   204: void;
 };
@@ -2632,7 +2771,7 @@ export type PingHeadpingRequest = {
 
 export type PingHeadpingResponses = {
   /**
-   * Successful ping.
+   * Request fulfilled, nothing follows
    */
   204: void;
 };
@@ -2760,6 +2899,19 @@ export type PlaylistsIdDeleteErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type PlaylistsIdDeleteError =
@@ -2794,6 +2946,19 @@ export type PlaylistsIdGetErrors = {
    * Validation Exception
    */
   400: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
+  /**
+   * Not Found Exception
+   */
+  404: {
     status_code: number;
     detail: string;
     extra?:
@@ -2846,6 +3011,19 @@ export type PlaylistsIdUpdateErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type PlaylistsIdUpdateError =
@@ -2875,6 +3053,19 @@ export type PlaylistsIdM3Um3uErrors = {
    * Validation Exception
    */
   400: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
+  /**
+   * Not Found Exception
+   */
+  404: {
     status_code: number;
     detail: string;
     extra?:
@@ -2922,6 +3113,19 @@ export type PlaylistsIdM3uHeadm3uErrors = {
         }
       | Array<unknown>;
   };
+  /**
+   * Not Found Exception
+   */
+  404: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
 };
 
 export type PlaylistsIdM3uHeadm3uError =
@@ -2929,7 +3133,7 @@ export type PlaylistsIdM3uHeadm3uError =
 
 export type PlaylistsIdM3uHeadm3uResponses = {
   /**
-   * Request fulfilled, nothing follows
+   * Request fulfilled, headers follow
    */
   200: unknown;
 };
@@ -2937,13 +3141,36 @@ export type PlaylistsIdM3uHeadm3uResponses = {
 export type SseSubscribeRequest = {
   body?: never;
   path?: never;
-  query?: never;
+  query?: {
+    /**
+     * Types of events to subscribe to.
+     */
+    types?: SubscribeRequestTypes | string | null;
+  };
   url: "/sse";
 };
 
+export type SseSubscribeErrors = {
+  /**
+   * Validation Exception
+   */
+  400: {
+    status_code: number;
+    detail: string;
+    extra?:
+      | null
+      | {
+          [key: string]: unknown;
+        }
+      | Array<unknown>;
+  };
+};
+
+export type SseSubscribeError = SseSubscribeErrors[keyof SseSubscribeErrors];
+
 export type SseSubscribeResponses = {
   /**
-   * Stream of Server-Sent Events.
+   * Request fulfilled, stream of Server-Sent Events follows
    */
   200: string;
 };
