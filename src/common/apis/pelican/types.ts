@@ -2633,7 +2633,7 @@ export type MediaIdContentDownloadResponses = {
   /**
    * Stream Response
    */
-  200: Blob | File;
+  200: ReadableStream;
 };
 
 export type MediaIdContentDownloadResponse =
@@ -2688,7 +2688,7 @@ export type MediaIdContentHeaddownloadResponses = {
 };
 
 export type MediaIdContentUploadRequest = {
-  body: Blob | File;
+  body: ReadableStream;
   headers: {
     /**
      * UploadRequestType

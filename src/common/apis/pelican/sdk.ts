@@ -424,6 +424,7 @@ export class Sdk extends HeyApiClient {
       MediaIdContentDownloadErrors,
       ThrowOnError
     >({
+      parseAs: "stream",
       requestValidator: async (data) =>
         await MediaIdContentDownloadRequestSchema.parseAsync(data),
       responseValidator: async (data) =>
@@ -467,6 +468,8 @@ export class Sdk extends HeyApiClient {
       ThrowOnError
     >({
       bodySerializer: null,
+      // @ts-expect-error
+      duplex: "half",
       requestValidator: async (data) =>
         await MediaIdContentUploadRequestSchema.parseAsync(data),
       responseValidator: async (data) =>
