@@ -15,9 +15,9 @@ export const GetPlaylistResponseSchema = z.object({
 });
 
 export const GetPingRequestSchema = z.object({
-  body: z.optional(z.never()),
-  path: z.optional(z.never()),
-  query: z.optional(z.never()),
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
 });
 
 /**
@@ -28,9 +28,9 @@ export const GetPingResponseSchema = z.void().register(z.globalRegistry, {
 });
 
 export const GetPlaylistRequestSchema = z.object({
-  body: z.optional(z.never()),
-  path: z.optional(z.never()),
-  query: z.optional(z.never()),
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
 });
 
 /**
@@ -40,8 +40,8 @@ export const GetPlaylistResponseSchema2 = GetPlaylistResponseSchema;
 
 export const PutPlaylistRequestSchema2 = z.object({
   body: PutPlaylistRequestSchema,
-  path: z.optional(z.never()),
-  query: z.optional(z.never()),
+  path: z.never().optional(),
+  query: z.never().optional(),
 });
 
 /**
