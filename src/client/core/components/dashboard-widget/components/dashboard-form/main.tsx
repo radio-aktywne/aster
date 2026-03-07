@@ -18,7 +18,7 @@ export function DashboardForm({
 
   const listPlaylistsQuery = useSuspenseQuery(
     orpcClientSideQueryClient.core.listPlaylists.queryOptions({
-      input: { limit: "null" },
+      input: { limit: null },
     }),
   );
 
