@@ -24,8 +24,8 @@ msgid "aster"
 msgstr "aster"
 
 #: src/app/(root)/layout.tsx:33
-msgid "aster is a Next.js app"
-msgstr "aster to aplikacja Next.js"
+msgid "Broadcast composing app 🧼"
+msgstr "Broadcast composing app 🧼"
 
 #: src/client/test/components/test-widget/components/test-form/main.tsx:25
 msgid "Enter some value"
