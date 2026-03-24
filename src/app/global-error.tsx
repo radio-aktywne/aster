@@ -6,7 +6,7 @@ import { GlobalErrorView } from "./global-error.view";
 import "./styles.css";
 
 function getDescription({}: ErrorMetadataUtilityInput = {}) {
-  return "aster is a Next.js app";
+  return "Broadcast composing app 🧼";
 }
 
 function getTitle({}: ErrorMetadataUtilityInput = {}) {
