@@ -2,18 +2,18 @@ import { msg } from "@lingui/core/macro";
 import { Button, Select } from "@mantine/core";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import type { DashboardFormInput } from "./types";
+import type { StreamControlFormInput } from "./types";
 
 import { useForm } from "../../../../../../isomorphic/core/hooks/use-form";
 import { useLocalization } from "../../../../../../isomorphic/localization/hooks/use-localization";
 import { orpcClientSideQueryClient } from "../../../../../orpc/vars/clients";
 import { Schemas } from "./schemas";
 
-export function DashboardForm({
+export function StreamControlForm({
   initialValues,
   onError,
   onSubmit,
-}: DashboardFormInput) {
+}: StreamControlFormInput) {
   const { localization } = useLocalization();
 
   const listPlaylistsQuery = useSuspenseQuery(
@@ -45,7 +45,12 @@ export function DashboardForm({
         required={true}
         {...form.getInputProps("playlist")}
       />
-      <Button loading={submitting} type="submit">
+      <Button
+        loading={submitting}
+        mt="auto"
+        style={{ flexShrink: 0 }}
+        type="submit"
+      >
         {localization.localize(msg({ message: "Save" }))}
       </Button>
     </form>

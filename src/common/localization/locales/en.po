@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/client/core/components/dashboard-widget/main.tsx:63
+#: src/client/core/components/stream-control-widget/main.tsx:74
 #: src/client/test/components/test-widget/main.tsx:52
 msgid "An unexpected error occurred"
 msgstr "An unexpected error occurred"
@@ -26,6 +26,11 @@ msgstr "aster"
 #: src/app/(root)/layout.tsx:33
 msgid "Broadcast composing app 🧼"
 msgstr "Broadcast composing app 🧼"
+
+#: src/client/core/components/stream-control-widget/main.tsx:46
+#: src/client/core/components/stream-control-widget/main.tsx:56
+msgid "Changes saved successfully"
+msgstr "Changes saved successfully"
 
 #: src/client/test/components/test-widget/components/test-form/main.tsx:25
 msgid "Enter some value"
@@ -43,8 +48,8 @@ msgstr "Error • aster"
 msgid "Info"
 msgstr "Info"
 
-#: src/client/core/components/dashboard-widget/main.tsx:52
-#: src/client/core/components/dashboard-widget/main.tsx:77
+#: src/client/core/components/stream-control-widget/main.tsx:63
+#: src/client/core/components/stream-control-widget/main.tsx:89
 #: src/client/test/components/test-widget/main.tsx:41
 #: src/client/test/components/test-widget/main.tsx:62
 msgid "Invalid input"
@@ -58,29 +63,25 @@ msgstr "Not Found • aster"
 msgid "Page not found"
 msgstr "Page not found"
 
-#: src/client/core/components/dashboard-widget/components/dashboard-form/main.tsx:44
+#: src/client/core/components/stream-control-widget/components/stream-control-form/main.tsx:44
 msgid "Playlist"
 msgstr "Playlist"
-
-#: src/client/core/components/dashboard-widget/main.tsx:37
-msgid "Playlist is required"
-msgstr "Playlist is required"
-
-#: src/client/core/components/dashboard-widget/main.tsx:46
-msgid "Playlist updated successfully"
-msgstr "Playlist updated successfully"
 
 #: src/isomorphic/core/components/generic/error-widget/main.tsx:21
 msgid "Retry"
 msgstr "Retry"
 
-#: src/client/core/components/dashboard-widget/components/dashboard-form/main.tsx:49
+#: src/client/core/components/stream-control-widget/components/stream-control-form/main.tsx:54
 msgid "Save"
 msgstr "Save"
 
 #: src/app/(root)/(main)/error.view.tsx:10
 msgid "Something went wrong"
 msgstr "Something went wrong"
+
+#: src/client/core/components/stream-control-widget/main.tsx:95
+msgid "Stream Control"
+msgstr "Stream Control"
 
 #: src/client/test/components/test-widget/components/test-form/main.tsx:30
 msgid "Submit"

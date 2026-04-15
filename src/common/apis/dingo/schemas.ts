@@ -27,6 +27,21 @@ export const GetPingResponseSchema = z.void().register(z.globalRegistry, {
   description: "Request fulfilled, nothing follows",
 });
 
+export const DeletePlaylistRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
+});
+
+/**
+ * Request fulfilled, nothing follows
+ */
+export const DeletePlaylistResponseSchema = z
+  .void()
+  .register(z.globalRegistry, {
+    description: "Request fulfilled, nothing follows",
+  });
+
 export const GetPlaylistRequestSchema = z.object({
   body: z.never().optional(),
   path: z.never().optional(),

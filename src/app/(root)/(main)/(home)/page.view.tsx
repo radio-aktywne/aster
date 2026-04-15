@@ -3,7 +3,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import type { PageViewInput } from "../../../types";
 import type { Schemas } from "./schemas";
 
-import { DashboardWidget } from "../../../../client/core/components/dashboard-widget";
+import { StreamControlWidget } from "../../../../client/core/components/stream-control-widget";
 import { LoadingWidget } from "../../../../common/core/components/generic/loading-widget";
 import { Hydrated } from "../../../../isomorphic/generic/components/hydrated";
 import { orpcServerSideQueryClient } from "../../../../server/orpc/vars/clients";
@@ -28,7 +28,7 @@ export async function HomePageView({}: PageViewInput<
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Hydrated fallback={<LoadingWidget />}>
-        <DashboardWidget />
+        <StreamControlWidget />
       </Hydrated>
     </HydrationBoundary>
   );
