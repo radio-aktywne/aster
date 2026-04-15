@@ -1,20 +1,22 @@
 "use client";
 
 import { msg } from "@lingui/core/macro";
-import { Stack } from "@mantine/core";
+import { Stack, Title } from "@mantine/core";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { useCallback, useMemo } from "react";
 
-import type { DashboardFormSubmitInput } from "./components/dashboard-form";
-import type { DashboardWidgetInput } from "./types";
+import type { StreamControlFormSubmitInput } from "./components/stream-control-form";
+import type { StreamControlWidgetInput } from "./types";
 
 import { getValidationIssue } from "../../../../common/orpc/lib/get-validation-issue";
 import { isOrpcDefinedError } from "../../../../common/orpc/lib/is-orpc-defined-error";
+import { useLocalization } from "../../../../isomorphic/localization/hooks/use-localization";
 import { useNotifications } from "../../../../isomorphic/notifications/hooks/use-notifications";
 import { orpcClientSideQueryClient } from "../../../orpc/vars/clients";
-import { DashboardForm } from "./components/dashboard-form";
+import { StreamControlForm } from "./components/stream-control-form";
 
-export function DashboardWidget({}: DashboardWidgetInput) {
+export function StreamControlWidget({}: StreamControlWidgetInput) {
+  const { localization } = useLocalization();
   const { notifications } = useNotifications();
 
   const getCurrentPlaylistQuery = useSuspenseQuery(
@@ -25,28 +27,37 @@ export function DashboardWidget({}: DashboardWidgetInput) {
     orpcClientSideQueryClient.core.setCurrentPlaylist.mutationOptions(),
   );
 
+  const removeCurrentPlaylistMutation = useMutation(
+    orpcClientSideQueryClient.core.removeCurrentPlaylist.mutationOptions(),
+  );
+
   const initialValues = useMemo(
     () => ({ playlist: getCurrentPlaylistQuery.data?.id || null }),
     [getCurrentPlaylistQuery.data?.id],
   );
 
-  const handleSubmit = useCallback(
-    async ({ values }: DashboardFormSubmitInput) => {
-      if (values.playlist === null)
-        return {
-          errors: { playlist: msg({ message: "Playlist is required" }) },
-        };
-
+  const handleSave = useCallback(
+    async ({ values }: StreamControlFormSubmitInput) => {
       try {
-        const { id } = await setCurrentPlaylistMutation.mutateAsync({
-          id: values.playlist,
-        });
+        if (values.playlist === null) {
+          await removeCurrentPlaylistMutation.mutateAsync();
 
-        notifications.success({
-          message: msg({ message: "Playlist updated successfully" }),
-        });
+          notifications.success({
+            message: msg({ message: "Changes saved successfully" }),
+          });
 
-        return { values: { playlist: id } };
+          return { values: { playlist: null } };
+        } else {
+          const { id } = await setCurrentPlaylistMutation.mutateAsync({
+            id: values.playlist,
+          });
+
+          notifications.success({
+            message: msg({ message: "Changes saved successfully" }),
+          });
+
+          return { values: { playlist: id } };
+        }
       } catch (error) {
         if (isOrpcDefinedError(error) && error.code === "BAD_REQUEST") {
           notifications.error({ message: msg({ message: "Invalid input" }) });
@@ -69,6 +80,7 @@ export function DashboardWidget({}: DashboardWidgetInput) {
     [
       notifications.error,
       notifications.success,
+      removeCurrentPlaylistMutation.mutateAsync,
       setCurrentPlaylistMutation.mutateAsync,
     ],
   );
@@ -78,11 +90,14 @@ export function DashboardWidget({}: DashboardWidgetInput) {
   }, [notifications.error]);
 
   return (
-    <Stack align="stretch" gap="xl">
-      <DashboardForm
+    <Stack h="100%" w="100%">
+      <Title ta="center">
+        {localization.localize(msg({ message: "Stream Control" }))}
+      </Title>
+      <StreamControlForm
         initialValues={initialValues}
         onError={handleError}
-        onSubmit={handleSubmit}
+        onSubmit={handleSave}
       />
     </Stack>
   );

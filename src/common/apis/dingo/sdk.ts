@@ -2,6 +2,8 @@
 
 import type { Client, Options as Options2, TDataShape } from "./client";
 import {
+  DeletePlaylistRequestSchema,
+  DeletePlaylistResponseSchema,
   GetPingRequestSchema,
   GetPingResponseSchema,
   GetPlaylistRequestSchema,
@@ -10,6 +12,8 @@ import {
   PutPlaylistResponseSchema2,
 } from "./schemas";
 import type {
+  DeletePlaylistRequest,
+  DeletePlaylistResponses,
   GetPingRequest,
   GetPingResponses,
   GetPlaylistErrors,
@@ -96,9 +100,31 @@ export class Sdk extends HeyApiClient {
   }
 
   /**
-   * Get playlist data
+   * Remove playlist
    *
-   * Get the current playlist data.
+   * Remove the current playlist.
+   */
+  public deletePlaylist<ThrowOnError extends boolean = false>(
+    options?: Options<DeletePlaylistRequest, ThrowOnError>,
+  ) {
+    return (options?.client ?? this.client).delete<
+      DeletePlaylistResponses,
+      unknown,
+      ThrowOnError
+    >({
+      requestValidator: async (data) =>
+        await DeletePlaylistRequestSchema.parseAsync(data),
+      responseValidator: async (data) =>
+        await DeletePlaylistResponseSchema.parseAsync(data),
+      url: "/playlist",
+      ...options,
+    });
+  }
+
+  /**
+   * Get playlist
+   *
+   * Get the current playlist.
    */
   public getPlaylist<ThrowOnError extends boolean = false>(
     options?: Options<GetPlaylistRequest, ThrowOnError>,
@@ -118,9 +144,9 @@ export class Sdk extends HeyApiClient {
   }
 
   /**
-   * Update playlist data
+   * Update playlist
    *
-   * Update the current playlist data.
+   * Update the current playlist.
    */
   public putPlaylist<ThrowOnError extends boolean = false>(
     options: Options<PutPlaylistRequest2, ThrowOnError>,

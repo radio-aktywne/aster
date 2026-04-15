@@ -4,12 +4,11 @@ import { orpcServerRootBase } from "../../../../../bases/root";
 export const setCurrentPlaylist =
   orpcServerRootBase.core.setCurrentPlaylist.handler(
     async ({ errors, input }) => {
-      const { data: setCurrentPlaylistData } =
+      const { data: putPlaylistData } =
         await state.current.apis.dingo.putPlaylist({ body: input });
 
-      if (setCurrentPlaylistData === undefined)
-        throw errors.INTERNAL_SERVER_ERROR();
+      if (putPlaylistData === undefined) throw errors.INTERNAL_SERVER_ERROR();
 
-      return setCurrentPlaylistData;
+      return putPlaylistData;
     },
   );

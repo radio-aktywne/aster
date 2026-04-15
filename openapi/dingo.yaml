@@ -1,7 +1,7 @@
 openapi: "3.1.0"
 info:
   title: dingo
-  version: "0.17.0"
+  version: "0.18.0"
 paths:
   /ping:
     get:
@@ -19,8 +19,8 @@ paths:
                 example: no-cache
   /playlist:
     get:
-      summary: Get playlist data
-      description: Get the current playlist data.
+      summary: Get playlist
+      description: Get the current playlist.
       tags:
         - Playlist
       responses:
@@ -36,10 +36,10 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: Playlist data not found.
+                example: No playlist is currently set.
     put:
-      summary: Update playlist data
-      description: Update the current playlist data.
+      summary: Update playlist
+      description: Update the current playlist.
       tags:
         - Playlist
       requestBody:
@@ -56,12 +56,20 @@ paths:
               schema:
                 $ref: "#/components/schemas/PutPlaylistResponse"
         "400":
-          description: Bad request syntax
+          description: Request failed, bad request
           content:
             text/plain:
               schema:
                 type: string
                 example: Request body is not a valid JSON object.
+    delete:
+      summary: Remove playlist
+      description: Remove the current playlist.
+      tags:
+        - Playlist
+      responses:
+        "204":
+          description: Request fulfilled, nothing follows
 components:
   schemas:
     GetPlaylistResponse:
@@ -70,7 +78,7 @@ components:
         id:
           type: string
           format: uuid
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: 8be4df61-93ca-11d2-aa0d-00e098032b8c
       required:
         - id
     PutPlaylistRequest:
@@ -79,7 +87,7 @@ components:
         id:
           type: string
           format: uuid
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: 8be4df61-93ca-11d2-aa0d-00e098032b8c
       required:
         - id
     PutPlaylistResponse:
@@ -88,6 +96,6 @@ components:
         id:
           type: string
           format: uuid
-          example: 123e4567-e89b-12d3-a456-426614174000
+          example: 8be4df61-93ca-11d2-aa0d-00e098032b8c
       required:
         - id

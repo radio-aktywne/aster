@@ -32,6 +32,23 @@ export type GetPingResponses = {
 
 export type GetPingResponse = GetPingResponses[keyof GetPingResponses];
 
+export type DeletePlaylistRequest = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: "/playlist";
+};
+
+export type DeletePlaylistResponses = {
+  /**
+   * Request fulfilled, nothing follows
+   */
+  204: void;
+};
+
+export type DeletePlaylistResponse =
+  DeletePlaylistResponses[keyof DeletePlaylistResponses];
+
 export type GetPlaylistRequest = {
   body?: never;
   path?: never;
@@ -67,7 +84,7 @@ export type PutPlaylistRequest2 = {
 
 export type PutPlaylistErrors = {
   /**
-   * Bad request syntax
+   * Request failed, bad request
    */
   400: string;
 };
