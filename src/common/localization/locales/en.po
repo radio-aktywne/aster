@@ -18,12 +18,12 @@ msgstr ""
 msgid "An unexpected error occurred"
 msgstr "An unexpected error occurred"
 
-#: src/app/(root)/(main)/(home)/page.tsx:20
-#: src/app/(root)/layout.tsx:39
+#: src/app/(root)/(main)/(home)/page.tsx:21
+#: src/app/(root)/layout.tsx:42
 msgid "aster"
 msgstr "aster"
 
-#: src/app/(root)/layout.tsx:33
+#: src/app/(root)/layout.tsx:36
 msgid "Broadcast composing app 🧼"
 msgstr "Broadcast composing app 🧼"
 
@@ -36,15 +36,19 @@ msgstr "Changes saved successfully"
 msgid "Enter some value"
 msgstr "Enter some value"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:46
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:40
 msgid "Error"
 msgstr "Error"
 
-#: src/app/(root)/(main)/error.tsx:11
+#: src/app/(root)/error.tsx:11
 msgid "Error • aster"
 msgstr "Error • aster"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:56
+#: src/app/(root)/forbidden.tsx:10
+msgid "Forbidden • aster"
+msgstr "Forbidden • aster"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:51
 msgid "Info"
 msgstr "Info"
 
@@ -55,11 +59,15 @@ msgstr "Info"
 msgid "Invalid input"
 msgstr "Invalid input"
 
-#: src/app/(root)/(main)/not-found.tsx:15
+#: src/isomorphic/identity/components/identity-widget/main.tsx:21
+msgid "Logout"
+msgstr "Logout"
+
+#: src/app/(root)/not-found.tsx:15
 msgid "Not Found • aster"
 msgstr "Not Found • aster"
 
-#: src/app/(root)/(main)/not-found.view.tsx:8
+#: src/isomorphic/core/components/generic/not-found-widget/main.tsx:15
 msgid "Page not found"
 msgstr "Page not found"
 
@@ -67,7 +75,7 @@ msgstr "Page not found"
 msgid "Playlist"
 msgstr "Playlist"
 
-#: src/isomorphic/core/components/generic/error-widget/main.tsx:21
+#: src/isomorphic/core/components/generic/error-widget/main.tsx:25
 msgid "Retry"
 msgstr "Retry"
 
@@ -75,7 +83,7 @@ msgstr "Retry"
 msgid "Save"
 msgstr "Save"
 
-#: src/app/(root)/(main)/error.view.tsx:10
+#: src/isomorphic/core/components/generic/error-widget/main.tsx:16
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
@@ -87,14 +95,22 @@ msgstr "Stream Control"
 msgid "Submit"
 msgstr "Submit"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:66
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:62
 msgid "Success"
 msgstr "Success"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:76
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:73
 msgid "Warning"
 msgstr "Warning"
 
-#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:27
+#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:29
 msgid "Why did the chicken cross the road? To get to the other side."
 msgstr "Why did the chicken cross the road? To get to the other side."
+
+#: src/isomorphic/access/components/forbidden-widget/main.tsx:16
+msgid "You are not allowed to access this page"
+msgstr "You are not allowed to access this page"
+
+#: src/isomorphic/identity/components/identity-provider/components/user-synchronizer/main.tsx:56
+msgid "You are not authenticated. Reload the page to authenticate again."
+msgstr "You are not authenticated. Reload the page to authenticate again."

@@ -18,12 +18,12 @@ msgstr ""
 msgid "An unexpected error occurred"
 msgstr "Wystąpił nieoczekiwany błąd"
 
-#: src/app/(root)/(main)/(home)/page.tsx:20
-#: src/app/(root)/layout.tsx:39
+#: src/app/(root)/(main)/(home)/page.tsx:21
+#: src/app/(root)/layout.tsx:42
 msgid "aster"
 msgstr "aster"
 
-#: src/app/(root)/layout.tsx:33
+#: src/app/(root)/layout.tsx:36
 msgid "Broadcast composing app 🧼"
 msgstr "Broadcast composing app 🧼"
 
@@ -36,15 +36,19 @@ msgstr "Zmiany zostały pomyślnie zapisane"
 msgid "Enter some value"
 msgstr "Wprowadź jakąś wartość"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:46
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:40
 msgid "Error"
 msgstr "Błąd"
 
-#: src/app/(root)/(main)/error.tsx:11
+#: src/app/(root)/error.tsx:11
 msgid "Error • aster"
 msgstr "Błąd • aster"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:56
+#: src/app/(root)/forbidden.tsx:10
+msgid "Forbidden • aster"
+msgstr "Brak dostępu • aster"
+
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:51
 msgid "Info"
 msgstr "Informacja"
 
@@ -55,11 +59,15 @@ msgstr "Informacja"
 msgid "Invalid input"
 msgstr "Nieprawidłowe dane wejściowe"
 
-#: src/app/(root)/(main)/not-found.tsx:15
+#: src/isomorphic/identity/components/identity-widget/main.tsx:21
+msgid "Logout"
+msgstr "Wyloguj się"
+
+#: src/app/(root)/not-found.tsx:15
 msgid "Not Found • aster"
 msgstr "Nie znaleziono • aster"
 
-#: src/app/(root)/(main)/not-found.view.tsx:8
+#: src/isomorphic/core/components/generic/not-found-widget/main.tsx:15
 msgid "Page not found"
 msgstr "Nie znaleziono strony"
 
@@ -67,7 +75,7 @@ msgstr "Nie znaleziono strony"
 msgid "Playlist"
 msgstr "Playlista"
 
-#: src/isomorphic/core/components/generic/error-widget/main.tsx:21
+#: src/isomorphic/core/components/generic/error-widget/main.tsx:25
 msgid "Retry"
 msgstr "Spróbuj ponownie"
 
@@ -75,7 +83,7 @@ msgstr "Spróbuj ponownie"
 msgid "Save"
 msgstr "Zapisz"
 
-#: src/app/(root)/(main)/error.view.tsx:10
+#: src/isomorphic/core/components/generic/error-widget/main.tsx:16
 msgid "Something went wrong"
 msgstr "Coś poszło nie tak"
 
@@ -87,14 +95,22 @@ msgstr "Sterowanie transmisją"
 msgid "Submit"
 msgstr "Wyślij"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:66
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:62
 msgid "Success"
 msgstr "Sukces"
 
-#: src/isomorphic/notifications/hooks/use-notifications/main.ts:76
+#: src/isomorphic/notifications/hooks/use-notifications/main.ts:73
 msgid "Warning"
 msgstr "Ostrzeżenie"
 
-#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:27
+#: src/server/orpc/vars/procedures/vars/test/vars/validate/main.ts:29
 msgid "Why did the chicken cross the road? To get to the other side."
 msgstr "Dlaczego kura przeszła przez ulicę? Żeby dostać się na drugą stronę."
+
+#: src/isomorphic/access/components/forbidden-widget/main.tsx:16
+msgid "You are not allowed to access this page"
+msgstr "Nie masz dostępu do tej strony"
+
+#: src/isomorphic/identity/components/identity-provider/components/user-synchronizer/main.tsx:56
+msgid "You are not authenticated. Reload the page to authenticate again."
+msgstr "Nie jesteś uwierzytelniony. Odśwież stronę, aby ponownie się uwierzytelnić."
