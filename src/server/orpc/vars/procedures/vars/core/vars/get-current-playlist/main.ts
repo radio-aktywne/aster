@@ -1,8 +1,10 @@
 import { state } from "../../../../../../../state/vars/state";
 import { orpcServerRootBase } from "../../../../../bases/root";
+import { authenticatedMiddleware } from "../../../../../middleware/authenticated";
 
-export const getCurrentPlaylist =
-  orpcServerRootBase.core.getCurrentPlaylist.handler(async ({ errors }) => {
+export const getCurrentPlaylist = orpcServerRootBase.core.getCurrentPlaylist
+  .use(authenticatedMiddleware)
+  .handler(async ({ errors }) => {
     const { data: getPlaylistData, response: getPlaylistResponse } =
       await state.current.apis.dingo.getPlaylist();
 
