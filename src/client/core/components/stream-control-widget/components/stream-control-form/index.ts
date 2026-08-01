@@ -1,9 +1,15 @@
 export { StreamControlForm } from "./main";
 export type {
+  StreamControlFormErrorInput,
+  StreamControlFormErrors,
   StreamControlFormInitialValues,
   StreamControlFormInput,
+  StreamControlFormInputSchema,
   StreamControlFormOnError,
   StreamControlFormOnSubmit,
+  StreamControlFormOutputSchema,
+  StreamControlFormSubmitErrorOutput,
   StreamControlFormSubmitInput,
-  StreamControlFormValues,
+  StreamControlFormSubmitOutput,
+  StreamControlFormSubmitSuccessOutput,
 } from "./types";
