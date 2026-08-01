@@ -1,29 +1,67 @@
+import type { HasRequiredKeys } from "type-fest";
+import type * as z from "zod";
+
 import type {
+  UseFormErrorInput,
+  UseFormErrors,
   UseFormInitialValues,
   UseFormOnError,
   UseFormOnSubmit,
+  UseFormSubmitErrorOutput,
   UseFormSubmitInput,
-  UseFormValues,
+  UseFormSubmitOutput,
+  UseFormSubmitSuccessOutput,
 } from "../../../../../../isomorphic/core/hooks/use-form";
 import type { Schemas } from "./schemas";
 
-export type StreamControlFormSchema = typeof Schemas.Values;
+export type StreamControlFormInputSchema = typeof Schemas.Input;
 
-export type StreamControlFormValues = UseFormValues<StreamControlFormSchema>;
+export type StreamControlFormOutputSchema = typeof Schemas.Output;
 
-export type StreamControlFormInitialValues =
-  UseFormInitialValues<StreamControlFormSchema>;
+export type StreamControlFormInitialValues = UseFormInitialValues<
+  z.output<StreamControlFormInputSchema>
+>;
 
-export type StreamControlFormOnError = UseFormOnError;
+export type StreamControlFormErrorInput = UseFormErrorInput<
+  z.output<StreamControlFormInputSchema>
+>;
 
-export type StreamControlFormSubmitInput =
-  UseFormSubmitInput<StreamControlFormSchema>;
+export type StreamControlFormOnError = UseFormOnError<
+  z.output<StreamControlFormInputSchema>
+>;
 
-export type StreamControlFormOnSubmit =
-  UseFormOnSubmit<StreamControlFormSchema>;
+export type StreamControlFormSubmitInput = UseFormSubmitInput<
+  z.output<StreamControlFormOutputSchema>
+>;
 
-export type StreamControlFormInput = {
-  initialValues: StreamControlFormValues;
+export type StreamControlFormErrors = UseFormErrors<
+  z.input<StreamControlFormInputSchema>
+>;
+
+export type StreamControlFormSubmitErrorOutput = UseFormSubmitErrorOutput<
+  z.input<StreamControlFormInputSchema>
+>;
+
+export type StreamControlFormSubmitSuccessOutput = UseFormSubmitSuccessOutput<
+  z.output<StreamControlFormInputSchema>
+>;
+
+export type StreamControlFormSubmitOutput = UseFormSubmitOutput<
+  z.input<StreamControlFormInputSchema>,
+  z.output<StreamControlFormInputSchema>
+>;
+
+export type StreamControlFormOnSubmit = UseFormOnSubmit<
+  z.input<StreamControlFormInputSchema>,
+  z.output<StreamControlFormInputSchema>,
+  z.output<StreamControlFormOutputSchema>
+>;
+
+export type StreamControlFormInput = (HasRequiredKeys<
+  z.output<StreamControlFormInputSchema>
+> extends true
+  ? { initialValues: StreamControlFormInitialValues }
+  : { initialValues?: StreamControlFormInitialValues }) & {
   onError?: StreamControlFormOnError;
   onSubmit: StreamControlFormOnSubmit;
 };

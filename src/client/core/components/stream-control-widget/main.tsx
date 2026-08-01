@@ -90,7 +90,7 @@ export function StreamControlWidget({}: StreamControlWidgetInput) {
   }, [notifications.error]);
 
   return (
-    <Stack h="100%" w="100%">
+    <Stack gap="xl" h="100%" w="100%">
       <Title ta="center">
         {localization.localize(msg({ message: "Stream Control" }))}
       </Title>

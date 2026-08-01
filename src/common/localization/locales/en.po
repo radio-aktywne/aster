@@ -14,16 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/client/core/components/stream-control-widget/main.tsx:74
-#: src/client/test/components/test-widget/main.tsx:52
+#: src/client/test/components/test-widget/main.tsx:50
 msgid "An unexpected error occurred"
 msgstr "An unexpected error occurred"
 
 #: src/app/(root)/(main)/(home)/page.tsx:21
-#: src/app/(root)/layout.tsx:42
+#: src/app/(root)/layout.tsx:43
 msgid "aster"
 msgstr "aster"
 
-#: src/app/(root)/layout.tsx:36
+#: src/app/(root)/layout.tsx:37
 msgid "Broadcast composing app 🧼"
 msgstr "Broadcast composing app 🧼"
 
@@ -32,7 +32,7 @@ msgstr "Broadcast composing app 🧼"
 msgid "Changes saved successfully"
 msgstr "Changes saved successfully"
 
-#: src/client/test/components/test-widget/components/test-form/main.tsx:25
+#: src/client/test/components/test-widget/components/test-form/main.tsx:30
 msgid "Enter some value"
 msgstr "Enter some value"
 
@@ -54,8 +54,8 @@ msgstr "Info"
 
 #: src/client/core/components/stream-control-widget/main.tsx:63
 #: src/client/core/components/stream-control-widget/main.tsx:89
-#: src/client/test/components/test-widget/main.tsx:41
-#: src/client/test/components/test-widget/main.tsx:62
+#: src/client/test/components/test-widget/main.tsx:39
+#: src/client/test/components/test-widget/main.tsx:60
 msgid "Invalid input"
 msgstr "Invalid input"
 
@@ -71,7 +71,7 @@ msgstr "Not Found • aster"
 msgid "Page not found"
 msgstr "Page not found"
 
-#: src/client/core/components/stream-control-widget/components/stream-control-form/main.tsx:44
+#: src/client/core/components/stream-control-widget/components/stream-control-form/main.tsx:49
 msgid "Playlist"
 msgstr "Playlist"
 
@@ -79,7 +79,7 @@ msgstr "Playlist"
 msgid "Retry"
 msgstr "Retry"
 
-#: src/client/core/components/stream-control-widget/components/stream-control-form/main.tsx:54
+#: src/client/core/components/stream-control-widget/components/stream-control-form/main.tsx:60
 msgid "Save"
 msgstr "Save"
 
@@ -91,7 +91,7 @@ msgstr "Something went wrong"
 msgid "Stream Control"
 msgstr "Stream Control"
 
-#: src/client/test/components/test-widget/components/test-form/main.tsx:30
+#: src/client/test/components/test-widget/components/test-form/main.tsx:36
 msgid "Submit"
 msgstr "Submit"
 
