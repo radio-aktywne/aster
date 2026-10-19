@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 
-export const PutPlaylistResponseSchema = z.object({
+export const GetPlaylistResponseSchema = z.object({
   id: z.uuid(),
 });
 
@@ -10,14 +10,8 @@ export const PutPlaylistRequestSchema = z.object({
   id: z.uuid(),
 });
 
-export const GetPlaylistResponseSchema = z.object({
+export const PutPlaylistResponseSchema = z.object({
   id: z.uuid(),
-});
-
-export const GetPingRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z.never().optional(),
 });
 
 /**
@@ -25,12 +19,6 @@ export const GetPingRequestSchema = z.object({
  */
 export const GetPingResponseSchema = z.void().register(z.globalRegistry, {
   description: "Request fulfilled, nothing follows",
-});
-
-export const DeletePlaylistRequestSchema = z.object({
-  body: z.never().optional(),
-  path: z.never().optional(),
-  query: z.never().optional(),
 });
 
 /**
@@ -42,24 +30,38 @@ export const DeletePlaylistResponseSchema = z
     description: "Request fulfilled, nothing follows",
   });
 
+/**
+ * Request fulfilled, document follows
+ */
+export const GetPlaylistResponseSchema2 = GetPlaylistResponseSchema;
+
+export const ZPutPlaylistBody = PutPlaylistRequestSchema;
+
+/**
+ * Request fulfilled, document follows
+ */
+export const PutPlaylistResponseSchema2 = PutPlaylistResponseSchema;
+
+export const GetPingRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
+});
+
+export const DeletePlaylistRequestSchema = z.object({
+  body: z.never().optional(),
+  path: z.never().optional(),
+  query: z.never().optional(),
+});
+
 export const GetPlaylistRequestSchema = z.object({
   body: z.never().optional(),
   path: z.never().optional(),
   query: z.never().optional(),
 });
 
-/**
- * Request fulfilled, document follows
- */
-export const GetPlaylistResponseSchema2 = GetPlaylistResponseSchema;
-
 export const PutPlaylistRequestSchema2 = z.object({
-  body: PutPlaylistRequestSchema,
+  body: ZPutPlaylistBody,
   path: z.never().optional(),
   query: z.never().optional(),
 });
-
-/**
- * Request fulfilled, document follows
- */
-export const PutPlaylistResponseSchema2 = PutPlaylistResponseSchema;
