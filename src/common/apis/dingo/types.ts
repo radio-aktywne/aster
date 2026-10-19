@@ -4,7 +4,7 @@ export type ClientOptions = {
   baseUrl: `${string}://${string}` | (string & {});
 };
 
-export type PutPlaylistResponse = {
+export type GetPlaylistResponse = {
   id: string;
 };
 
@@ -12,7 +12,7 @@ export type PutPlaylistRequest = {
   id: string;
 };
 
-export type GetPlaylistResponse = {
+export type PutPlaylistResponse = {
   id: string;
 };
 

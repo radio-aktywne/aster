@@ -9,7 +9,7 @@ export const getCurrentPlaylist = orpcServerRootBase.core.getCurrentPlaylist
       await state.current.apis.dingo.getPlaylist();
 
     if (getPlaylistData === undefined) {
-      if (getPlaylistResponse.status === 404) return null;
+      if (getPlaylistResponse?.status === 404) return null;
       throw errors.INTERNAL_SERVER_ERROR();
     }
 
