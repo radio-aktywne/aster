@@ -545,8 +545,12 @@ export const CreateResponseBindingSchema = z
     rank: z.string().register(z.globalRegistry, {
       description: "Rank of the media in the binding.",
     }),
-    playlist: z.lazy(() => BindingsModelsPlaylistSchema).nullable(),
-    media: z.lazy(() => BindingsModelsMediaSchema).nullable(),
+    get playlist() {
+      return BindingsModelsPlaylistSchema.nullable();
+    },
+    get media() {
+      return BindingsModelsMediaSchema.nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Binding data.",
@@ -650,8 +654,12 @@ export const BindingsModelsBindingSchema = z
     rank: z.string().register(z.globalRegistry, {
       description: "Rank of the media in the binding.",
     }),
-    playlist: z.lazy((): any => BindingsModelsPlaylistSchema).nullable(),
-    media: z.lazy((): any => BindingsModelsMediaSchema).nullable(),
+    get playlist() {
+      return BindingsModelsPlaylistSchema.nullable();
+    },
+    get media() {
+      return BindingsModelsMediaSchema.nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Binding data.",
@@ -664,18 +672,16 @@ export const BindingsModelsBindingSchema = z
  */
 export const BindingsModelsBindingIncludeFromBindingSchema = z
   .object({
-    playlist: z
-      .union([
-        z.boolean(),
-        z.lazy(() => BindingsModelsPlaylistArgsFromBindingSchema),
-      ])
-      .optional(),
-    media: z
-      .union([
-        z.boolean(),
-        z.lazy(() => BindingsModelsMediaArgsFromBindingSchema),
-      ])
-      .optional(),
+    get playlist() {
+      return z
+        .union([z.boolean(), BindingsModelsPlaylistArgsFromBindingSchema])
+        .optional();
+    },
+    get media() {
+      return z
+        .union([z.boolean(), BindingsModelsMediaArgsFromBindingSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Binding",
@@ -715,22 +721,29 @@ export const BindingsModelsBindingWhereInputSchema = z
     get media() {
       return BindingsModelsMediaRelationFilterSchema.optional();
     },
-    and: z
-      .array(z.lazy((): any => BindingsModelsBindingWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => BindingsModelsBindingWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => BindingsModelsBindingWhereInputSchema))
-      .optional(),
+    get and() {
+      return z
+        .array(z.lazy((): any => BindingsModelsBindingWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => BindingsModelsBindingWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => BindingsModelsBindingWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Binding arguments for searching",
   });
 
-export const BindingsModelsCreateRequestIncludeSchema =
-  BindingIncludeSchema.nullable();
+export const BindingsModelsCreateRequestIncludeSchema = z
+  .lazy(() => BindingIncludeSchema)
+  .nullable();
 
 /**
  * FindManyBindingArgsFromMedia
@@ -759,7 +772,11 @@ export const BindingsModelsFindManyBindingArgsFromMediaSchema = z
         ),
       ])
       .optional(),
-    where: BindingsModelsBindingWhereInputSchema.optional(),
+    get where() {
+      return z
+        .lazy((): any => BindingsModelsBindingWhereInputSchema)
+        .optional();
+    },
     cursor: z
       .union([
         BindingsModelsBindingWhereUniqueIdInputSchema,
@@ -769,7 +786,11 @@ export const BindingsModelsFindManyBindingArgsFromMediaSchema = z
     distinct: z
       .array(z.enum(["id", "playlistId", "mediaId", "rank"]))
       .optional(),
-    include: BindingsModelsBindingIncludeFromBindingSchema.optional(),
+    get include() {
+      return z
+        .lazy((): any => BindingsModelsBindingIncludeFromBindingSchema)
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Media",
@@ -802,7 +823,11 @@ export const BindingsModelsFindManyBindingArgsFromPlaylistSchema = z
         ),
       ])
       .optional(),
-    where: BindingsModelsBindingWhereInputSchema.optional(),
+    get where() {
+      return z
+        .lazy((): any => BindingsModelsBindingWhereInputSchema)
+        .optional();
+    },
     cursor: z
       .union([
         BindingsModelsBindingWhereUniqueIdInputSchema,
@@ -812,20 +837,27 @@ export const BindingsModelsFindManyBindingArgsFromPlaylistSchema = z
     distinct: z
       .array(z.enum(["id", "playlistId", "mediaId", "rank"]))
       .optional(),
-    include: BindingsModelsBindingIncludeFromBindingSchema.optional(),
+    get include() {
+      return z
+        .lazy((): any => BindingsModelsBindingIncludeFromBindingSchema)
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Playlist",
   });
 
-export const BindingsModelsGetRequestIncludeSchema =
-  BindingIncludeSchema.nullable();
+export const BindingsModelsGetRequestIncludeSchema = z
+  .lazy(() => BindingIncludeSchema)
+  .nullable();
 
-export const BindingsModelsListRequestIncludeSchema =
-  BindingIncludeSchema.nullable();
+export const BindingsModelsListRequestIncludeSchema = z
+  .lazy(() => BindingIncludeSchema)
+  .nullable();
 
-export const BindingsModelsListRequestWhereSchema =
-  BindingsModelsBindingWhereInputSchema.nullable();
+export const BindingsModelsListRequestWhereSchema = z
+  .lazy(() => BindingsModelsBindingWhereInputSchema)
+  .nullable();
 
 /**
  * BindingList
@@ -839,9 +871,11 @@ export const BindingsModelsListResponseResultsSchema = z
     }),
     limit: z.int().nullable(),
     offset: z.int().nullable(),
-    bindings: z.array(BindingsModelsBindingSchema).register(z.globalRegistry, {
-      description: "Bindings that matched the request.",
-    }),
+    get bindings() {
+      return z.array(BindingsModelsBindingSchema).register(z.globalRegistry, {
+        description: "Bindings that matched the request.",
+      });
+    },
   })
   .register(z.globalRegistry, {
     description: "List of bindings.",
@@ -860,7 +894,9 @@ export const BindingsModelsMediaSchema = z
     name: z.string().register(z.globalRegistry, {
       description: "Name of the media.",
     }),
-    bindings: z.array(BindingsModelsBindingSchema).nullable(),
+    get bindings() {
+      return z.array(z.lazy((): any => BindingsModelsBindingSchema)).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Media data.",
@@ -873,9 +909,9 @@ export const BindingsModelsMediaSchema = z
  */
 export const BindingsModelsMediaArgsFromBindingSchema = z
   .object({
-    include: z
-      .lazy((): any => BindingsModelsMediaIncludeFromMediaSchema)
-      .optional(),
+    get include() {
+      return BindingsModelsMediaIncludeFromMediaSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Binding",
@@ -888,9 +924,11 @@ export const BindingsModelsMediaArgsFromBindingSchema = z
  */
 export const BindingsModelsMediaIncludeFromMediaSchema = z
   .object({
-    bindings: z
-      .union([z.boolean(), BindingsModelsFindManyBindingArgsFromMediaSchema])
-      .optional(),
+    get bindings() {
+      return z
+        .union([z.boolean(), BindingsModelsFindManyBindingArgsFromMediaSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Media",
@@ -917,16 +955,24 @@ export const BindingsModelsMediaWhereInputSchema = z
   .object({
     id: z.union([z.string(), BindingsModelsStringFilterSchema]).optional(),
     name: z.union([z.string(), BindingsModelsStringFilterSchema]).optional(),
-    bindings: BindingsModelsBindingListRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => BindingsModelsMediaWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => BindingsModelsMediaWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => BindingsModelsMediaWhereInputSchema))
-      .optional(),
+    get bindings() {
+      return BindingsModelsBindingListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => BindingsModelsMediaWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => BindingsModelsMediaWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => BindingsModelsMediaWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Media arguments for searching",
@@ -945,7 +991,9 @@ export const BindingsModelsPlaylistSchema = z
     name: z.string().register(z.globalRegistry, {
       description: "Name of the playlist.",
     }),
-    bindings: z.array(BindingsModelsBindingSchema).nullable(),
+    get bindings() {
+      return z.array(z.lazy((): any => BindingsModelsBindingSchema)).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Playlist data.",
@@ -958,9 +1006,9 @@ export const BindingsModelsPlaylistSchema = z
  */
 export const BindingsModelsPlaylistArgsFromBindingSchema = z
   .object({
-    include: z
-      .lazy((): any => BindingsModelsPlaylistIncludeFromPlaylistSchema)
-      .optional(),
+    get include() {
+      return BindingsModelsPlaylistIncludeFromPlaylistSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Binding",
@@ -973,9 +1021,14 @@ export const BindingsModelsPlaylistArgsFromBindingSchema = z
  */
 export const BindingsModelsPlaylistIncludeFromPlaylistSchema = z
   .object({
-    bindings: z
-      .union([z.boolean(), BindingsModelsFindManyBindingArgsFromPlaylistSchema])
-      .optional(),
+    get bindings() {
+      return z
+        .union([
+          z.boolean(),
+          BindingsModelsFindManyBindingArgsFromPlaylistSchema,
+        ])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Playlist",
@@ -1002,23 +1055,32 @@ export const BindingsModelsPlaylistWhereInputSchema = z
   .object({
     id: z.union([z.string(), BindingsModelsStringFilterSchema]).optional(),
     name: z.union([z.string(), BindingsModelsStringFilterSchema]).optional(),
-    bindings: BindingsModelsBindingListRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => BindingsModelsPlaylistWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => BindingsModelsPlaylistWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => BindingsModelsPlaylistWhereInputSchema))
-      .optional(),
+    get bindings() {
+      return BindingsModelsBindingListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => BindingsModelsPlaylistWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => BindingsModelsPlaylistWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => BindingsModelsPlaylistWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Playlist arguments for searching",
   });
 
-export const BindingsModelsUpdateRequestIncludeSchema =
-  BindingIncludeSchema.nullable();
+export const BindingsModelsUpdateRequestIncludeSchema = z
+  .lazy(() => BindingIncludeSchema)
+  .nullable();
 
 /**
  * Binding
@@ -1039,8 +1101,12 @@ export const MediaModelsBindingSchema = z
     rank: z.string().register(z.globalRegistry, {
       description: "Rank of the media in the binding.",
     }),
-    playlist: z.lazy((): any => MediaModelsPlaylistSchema).nullable(),
-    media: z.lazy((): any => MediaModelsMediaSchema).nullable(),
+    get playlist() {
+      return z.lazy((): any => MediaModelsPlaylistSchema).nullable();
+    },
+    get media() {
+      return z.lazy((): any => MediaModelsMediaSchema).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Binding data.",
@@ -1053,15 +1119,16 @@ export const MediaModelsBindingSchema = z
  */
 export const MediaModelsBindingIncludeFromBindingSchema = z
   .object({
-    playlist: z
-      .union([
-        z.boolean(),
-        z.lazy(() => MediaModelsPlaylistArgsFromBindingSchema),
-      ])
-      .optional(),
-    media: z
-      .union([z.boolean(), z.lazy(() => MediaModelsMediaArgsFromBindingSchema)])
-      .optional(),
+    get playlist() {
+      return z
+        .union([z.boolean(), MediaModelsPlaylistArgsFromBindingSchema])
+        .optional();
+    },
+    get media() {
+      return z
+        .union([z.boolean(), MediaModelsMediaArgsFromBindingSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Binding",
@@ -1099,22 +1166,29 @@ export const MediaModelsBindingWhereInputSchema = z
     get media() {
       return MediaModelsMediaRelationFilterSchema.optional();
     },
-    and: z
-      .array(z.lazy((): any => MediaModelsBindingWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => MediaModelsBindingWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => MediaModelsBindingWhereInputSchema))
-      .optional(),
+    get and() {
+      return z
+        .array(z.lazy((): any => MediaModelsBindingWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => MediaModelsBindingWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => MediaModelsBindingWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Binding arguments for searching",
   });
 
-export const MediaModelsCreateRequestIncludeSchema =
-  MediaIncludeSchema.nullable();
+export const MediaModelsCreateRequestIncludeSchema = z
+  .lazy(() => MediaIncludeSchema)
+  .nullable();
 
 /**
  * FindManyBindingArgsFromMedia
@@ -1143,7 +1217,9 @@ export const MediaModelsFindManyBindingArgsFromMediaSchema = z
         ),
       ])
       .optional(),
-    where: MediaModelsBindingWhereInputSchema.optional(),
+    get where() {
+      return z.lazy((): any => MediaModelsBindingWhereInputSchema).optional();
+    },
     cursor: z
       .union([
         MediaModelsBindingWhereUniqueIdInputSchema,
@@ -1153,7 +1229,11 @@ export const MediaModelsFindManyBindingArgsFromMediaSchema = z
     distinct: z
       .array(z.enum(["id", "playlistId", "mediaId", "rank"]))
       .optional(),
-    include: MediaModelsBindingIncludeFromBindingSchema.optional(),
+    get include() {
+      return z
+        .lazy((): any => MediaModelsBindingIncludeFromBindingSchema)
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Media",
@@ -1186,7 +1266,9 @@ export const MediaModelsFindManyBindingArgsFromPlaylistSchema = z
         ),
       ])
       .optional(),
-    where: MediaModelsBindingWhereInputSchema.optional(),
+    get where() {
+      return z.lazy((): any => MediaModelsBindingWhereInputSchema).optional();
+    },
     cursor: z
       .union([
         MediaModelsBindingWhereUniqueIdInputSchema,
@@ -1196,16 +1278,23 @@ export const MediaModelsFindManyBindingArgsFromPlaylistSchema = z
     distinct: z
       .array(z.enum(["id", "playlistId", "mediaId", "rank"]))
       .optional(),
-    include: MediaModelsBindingIncludeFromBindingSchema.optional(),
+    get include() {
+      return z
+        .lazy((): any => MediaModelsBindingIncludeFromBindingSchema)
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Playlist",
   });
 
-export const MediaModelsGetRequestIncludeSchema = MediaIncludeSchema.nullable();
+export const MediaModelsGetRequestIncludeSchema = z
+  .lazy(() => MediaIncludeSchema)
+  .nullable();
 
-export const MediaModelsListRequestIncludeSchema =
-  MediaIncludeSchema.nullable();
+export const MediaModelsListRequestIncludeSchema = z
+  .lazy(() => MediaIncludeSchema)
+  .nullable();
 
 export const MediaModelsListRequestWhereSchema = z
   .lazy(() => MediaModelsMediaWhereInputSchema)
@@ -1230,7 +1319,7 @@ export const MediaModelsListResponseResultsSchema = z
     },
   })
   .register(z.globalRegistry, {
-    description: "List of media.",
+    description: "Media that matched the request.",
   });
 
 /**
@@ -1246,7 +1335,9 @@ export const MediaModelsMediaSchema = z
     name: z.string().register(z.globalRegistry, {
       description: "Name of the media.",
     }),
-    bindings: z.array(MediaModelsBindingSchema).nullable(),
+    get bindings() {
+      return z.array(MediaModelsBindingSchema).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Media data.",
@@ -1259,9 +1350,9 @@ export const MediaModelsMediaSchema = z
  */
 export const MediaModelsMediaArgsFromBindingSchema = z
   .object({
-    include: z
-      .lazy((): any => MediaModelsMediaIncludeFromMediaSchema)
-      .optional(),
+    get include() {
+      return MediaModelsMediaIncludeFromMediaSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Binding",
@@ -1274,9 +1365,11 @@ export const MediaModelsMediaArgsFromBindingSchema = z
  */
 export const MediaModelsMediaIncludeFromMediaSchema = z
   .object({
-    bindings: z
-      .union([z.boolean(), MediaModelsFindManyBindingArgsFromMediaSchema])
-      .optional(),
+    get bindings() {
+      return z
+        .union([z.boolean(), MediaModelsFindManyBindingArgsFromMediaSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Media",
@@ -1303,14 +1396,24 @@ export const MediaModelsMediaWhereInputSchema = z
   .object({
     id: z.union([z.string(), MediaModelsStringFilterSchema]).optional(),
     name: z.union([z.string(), MediaModelsStringFilterSchema]).optional(),
-    bindings: MediaModelsBindingListRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => MediaModelsMediaWhereInputSchema))
-      .optional(),
-    or: z.array(z.lazy((): any => MediaModelsMediaWhereInputSchema)).optional(),
-    not: z
-      .array(z.lazy((): any => MediaModelsMediaWhereInputSchema))
-      .optional(),
+    get bindings() {
+      return MediaModelsBindingListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => MediaModelsMediaWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => MediaModelsMediaWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => MediaModelsMediaWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Media arguments for searching",
@@ -1329,7 +1432,9 @@ export const MediaModelsPlaylistSchema = z
     name: z.string().register(z.globalRegistry, {
       description: "Name of the playlist.",
     }),
-    bindings: z.array(MediaModelsBindingSchema).nullable(),
+    get bindings() {
+      return z.array(MediaModelsBindingSchema).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Playlist data.",
@@ -1342,9 +1447,9 @@ export const MediaModelsPlaylistSchema = z
  */
 export const MediaModelsPlaylistArgsFromBindingSchema = z
   .object({
-    include: z
-      .lazy((): any => MediaModelsPlaylistIncludeFromPlaylistSchema)
-      .optional(),
+    get include() {
+      return MediaModelsPlaylistIncludeFromPlaylistSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Binding",
@@ -1357,9 +1462,11 @@ export const MediaModelsPlaylistArgsFromBindingSchema = z
  */
 export const MediaModelsPlaylistIncludeFromPlaylistSchema = z
   .object({
-    bindings: z
-      .union([z.boolean(), MediaModelsFindManyBindingArgsFromPlaylistSchema])
-      .optional(),
+    get bindings() {
+      return z
+        .union([z.boolean(), MediaModelsFindManyBindingArgsFromPlaylistSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Playlist",
@@ -1386,23 +1493,32 @@ export const MediaModelsPlaylistWhereInputSchema = z
   .object({
     id: z.union([z.string(), MediaModelsStringFilterSchema]).optional(),
     name: z.union([z.string(), MediaModelsStringFilterSchema]).optional(),
-    bindings: MediaModelsBindingListRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => MediaModelsPlaylistWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => MediaModelsPlaylistWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => MediaModelsPlaylistWhereInputSchema))
-      .optional(),
+    get bindings() {
+      return MediaModelsBindingListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => MediaModelsPlaylistWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => MediaModelsPlaylistWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => MediaModelsPlaylistWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Playlist arguments for searching",
   });
 
-export const MediaModelsUpdateRequestIncludeSchema =
-  MediaIncludeSchema.nullable();
+export const MediaModelsUpdateRequestIncludeSchema = z
+  .lazy(() => MediaIncludeSchema)
+  .nullable();
 
 /**
  * Binding
@@ -1423,8 +1539,12 @@ export const PlaylistsModelsBindingSchema = z
     rank: z.string().register(z.globalRegistry, {
       description: "Rank of the media in the binding.",
     }),
-    playlist: z.lazy((): any => PlaylistsModelsPlaylistSchema).nullable(),
-    media: z.lazy((): any => PlaylistsModelsMediaSchema).nullable(),
+    get playlist() {
+      return z.lazy((): any => PlaylistsModelsPlaylistSchema).nullable();
+    },
+    get media() {
+      return z.lazy((): any => PlaylistsModelsMediaSchema).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Binding data.",
@@ -1437,18 +1557,16 @@ export const PlaylistsModelsBindingSchema = z
  */
 export const PlaylistsModelsBindingIncludeFromBindingSchema = z
   .object({
-    playlist: z
-      .union([
-        z.boolean(),
-        z.lazy(() => PlaylistsModelsPlaylistArgsFromBindingSchema),
-      ])
-      .optional(),
-    media: z
-      .union([
-        z.boolean(),
-        z.lazy(() => PlaylistsModelsMediaArgsFromBindingSchema),
-      ])
-      .optional(),
+    get playlist() {
+      return z
+        .union([z.boolean(), PlaylistsModelsPlaylistArgsFromBindingSchema])
+        .optional();
+    },
+    get media() {
+      return z
+        .union([z.boolean(), PlaylistsModelsMediaArgsFromBindingSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Binding",
@@ -1490,22 +1608,29 @@ export const PlaylistsModelsBindingWhereInputSchema = z
     get media() {
       return PlaylistsModelsMediaRelationFilterSchema.optional();
     },
-    and: z
-      .array(z.lazy((): any => PlaylistsModelsBindingWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => PlaylistsModelsBindingWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => PlaylistsModelsBindingWhereInputSchema))
-      .optional(),
+    get and() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsBindingWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsBindingWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsBindingWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Binding arguments for searching",
   });
 
-export const PlaylistsModelsCreateRequestIncludeSchema =
-  PlaylistIncludeSchema.nullable();
+export const PlaylistsModelsCreateRequestIncludeSchema = z
+  .lazy(() => PlaylistIncludeSchema)
+  .nullable();
 
 /**
  * FindManyBindingArgsFromMedia
@@ -1534,7 +1659,11 @@ export const PlaylistsModelsFindManyBindingArgsFromMediaSchema = z
         ),
       ])
       .optional(),
-    where: PlaylistsModelsBindingWhereInputSchema.optional(),
+    get where() {
+      return z
+        .lazy((): any => PlaylistsModelsBindingWhereInputSchema)
+        .optional();
+    },
     cursor: z
       .union([
         PlaylistsModelsBindingWhereUniqueIdInputSchema,
@@ -1544,7 +1673,11 @@ export const PlaylistsModelsFindManyBindingArgsFromMediaSchema = z
     distinct: z
       .array(z.enum(["id", "playlistId", "mediaId", "rank"]))
       .optional(),
-    include: PlaylistsModelsBindingIncludeFromBindingSchema.optional(),
+    get include() {
+      return z
+        .lazy((): any => PlaylistsModelsBindingIncludeFromBindingSchema)
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Media",
@@ -1577,7 +1710,11 @@ export const PlaylistsModelsFindManyBindingArgsFromPlaylistSchema = z
         ),
       ])
       .optional(),
-    where: PlaylistsModelsBindingWhereInputSchema.optional(),
+    get where() {
+      return z
+        .lazy((): any => PlaylistsModelsBindingWhereInputSchema)
+        .optional();
+    },
     cursor: z
       .union([
         PlaylistsModelsBindingWhereUniqueIdInputSchema,
@@ -1587,17 +1724,23 @@ export const PlaylistsModelsFindManyBindingArgsFromPlaylistSchema = z
     distinct: z
       .array(z.enum(["id", "playlistId", "mediaId", "rank"]))
       .optional(),
-    include: PlaylistsModelsBindingIncludeFromBindingSchema.optional(),
+    get include() {
+      return z
+        .lazy((): any => PlaylistsModelsBindingIncludeFromBindingSchema)
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Playlist",
   });
 
-export const PlaylistsModelsGetRequestIncludeSchema =
-  PlaylistIncludeSchema.nullable();
+export const PlaylistsModelsGetRequestIncludeSchema = z
+  .lazy(() => PlaylistIncludeSchema)
+  .nullable();
 
-export const PlaylistsModelsListRequestIncludeSchema =
-  PlaylistIncludeSchema.nullable();
+export const PlaylistsModelsListRequestIncludeSchema = z
+  .lazy(() => PlaylistIncludeSchema)
+  .nullable();
 
 export const PlaylistsModelsListRequestWhereSchema = z
   .lazy(() => PlaylistsModelsPlaylistWhereInputSchema)
@@ -1638,7 +1781,9 @@ export const PlaylistsModelsMediaSchema = z
     name: z.string().register(z.globalRegistry, {
       description: "Name of the media.",
     }),
-    bindings: z.array(PlaylistsModelsBindingSchema).nullable(),
+    get bindings() {
+      return z.array(PlaylistsModelsBindingSchema).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Media data.",
@@ -1651,9 +1796,9 @@ export const PlaylistsModelsMediaSchema = z
  */
 export const PlaylistsModelsMediaArgsFromBindingSchema = z
   .object({
-    include: z
-      .lazy((): any => PlaylistsModelsMediaIncludeFromMediaSchema)
-      .optional(),
+    get include() {
+      return PlaylistsModelsMediaIncludeFromMediaSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Binding",
@@ -1666,9 +1811,11 @@ export const PlaylistsModelsMediaArgsFromBindingSchema = z
  */
 export const PlaylistsModelsMediaIncludeFromMediaSchema = z
   .object({
-    bindings: z
-      .union([z.boolean(), PlaylistsModelsFindManyBindingArgsFromMediaSchema])
-      .optional(),
+    get bindings() {
+      return z
+        .union([z.boolean(), PlaylistsModelsFindManyBindingArgsFromMediaSchema])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Media",
@@ -1695,16 +1842,24 @@ export const PlaylistsModelsMediaWhereInputSchema = z
   .object({
     id: z.union([z.string(), PlaylistsModelsStringFilterSchema]).optional(),
     name: z.union([z.string(), PlaylistsModelsStringFilterSchema]).optional(),
-    bindings: PlaylistsModelsBindingListRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => PlaylistsModelsMediaWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => PlaylistsModelsMediaWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => PlaylistsModelsMediaWhereInputSchema))
-      .optional(),
+    get bindings() {
+      return PlaylistsModelsBindingListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsMediaWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsMediaWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsMediaWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Media arguments for searching",
@@ -1723,7 +1878,9 @@ export const PlaylistsModelsPlaylistSchema = z
     name: z.string().register(z.globalRegistry, {
       description: "Name of the playlist.",
     }),
-    bindings: z.array(PlaylistsModelsBindingSchema).nullable(),
+    get bindings() {
+      return z.array(PlaylistsModelsBindingSchema).nullable();
+    },
   })
   .register(z.globalRegistry, {
     description: "Playlist data.",
@@ -1736,9 +1893,9 @@ export const PlaylistsModelsPlaylistSchema = z
  */
 export const PlaylistsModelsPlaylistArgsFromBindingSchema = z
   .object({
-    include: z
-      .lazy((): any => PlaylistsModelsPlaylistIncludeFromPlaylistSchema)
-      .optional(),
+    get include() {
+      return PlaylistsModelsPlaylistIncludeFromPlaylistSchema.optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Arguments for Binding",
@@ -1751,12 +1908,14 @@ export const PlaylistsModelsPlaylistArgsFromBindingSchema = z
  */
 export const PlaylistsModelsPlaylistIncludeFromPlaylistSchema = z
   .object({
-    bindings: z
-      .union([
-        z.boolean(),
-        PlaylistsModelsFindManyBindingArgsFromPlaylistSchema,
-      ])
-      .optional(),
+    get bindings() {
+      return z
+        .union([
+          z.boolean(),
+          PlaylistsModelsFindManyBindingArgsFromPlaylistSchema,
+        ])
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Relational arguments for Playlist",
@@ -1783,23 +1942,32 @@ export const PlaylistsModelsPlaylistWhereInputSchema = z
   .object({
     id: z.union([z.string(), PlaylistsModelsStringFilterSchema]).optional(),
     name: z.union([z.string(), PlaylistsModelsStringFilterSchema]).optional(),
-    bindings: PlaylistsModelsBindingListRelationFilterSchema.optional(),
-    and: z
-      .array(z.lazy((): any => PlaylistsModelsPlaylistWhereInputSchema))
-      .optional(),
-    or: z
-      .array(z.lazy((): any => PlaylistsModelsPlaylistWhereInputSchema))
-      .optional(),
-    not: z
-      .array(z.lazy((): any => PlaylistsModelsPlaylistWhereInputSchema))
-      .optional(),
+    get bindings() {
+      return PlaylistsModelsBindingListRelationFilterSchema.optional();
+    },
+    get and() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsPlaylistWhereInputSchema))
+        .optional();
+    },
+    get or() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsPlaylistWhereInputSchema))
+        .optional();
+    },
+    get not() {
+      return z
+        .array(z.lazy((): any => PlaylistsModelsPlaylistWhereInputSchema))
+        .optional();
+    },
   })
   .register(z.globalRegistry, {
     description: "Playlist arguments for searching",
   });
 
-export const PlaylistsModelsUpdateRequestIncludeSchema =
-  PlaylistIncludeSchema.nullable();
+export const PlaylistsModelsUpdateRequestIncludeSchema = z
+  .lazy(() => PlaylistIncludeSchema)
+  .nullable();
 
 export const ZBindingsIdDeletePath = z.object({
   id: BindingsModelsDeleteRequestIdSchema,
@@ -1833,7 +2001,7 @@ export const ZMediaIdContentDownloadPath = z.object({
  * Stream Response
  */
 export const MediaIdContentDownloadResponseSchema = z
-  .string()
+  .unknown()
   .register(z.globalRegistry, {
     description: "Stream Response",
   });
@@ -1842,7 +2010,7 @@ export const ZMediaIdContentHeaddownloadPath = z.object({
   id: HeadDownloadRequestIdSchema,
 });
 
-export const ZMediaIdContentUploadBody = z.string();
+export const ZMediaIdContentUploadBody = z.unknown();
 
 export const ZMediaIdContentUploadHeaders = z.object({
   "content-type": z.union([UploadRequestTypeSchema, z.string()]),
